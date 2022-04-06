@@ -1,4 +1,4 @@
-﻿namespace WebApplication1.Controllers
+﻿namespace WebAPI.Controllers
 {
     [ApiController, Route("api/products")]
     public class ProductController : ControllerBase

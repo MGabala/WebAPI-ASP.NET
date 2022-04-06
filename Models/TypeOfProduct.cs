@@ -1,4 +1,4 @@
-﻿namespace WebAPI_ASP.NET6.Models
+﻿namespace WebAPI.Models
 {
     public class TypeOfProduct
     {

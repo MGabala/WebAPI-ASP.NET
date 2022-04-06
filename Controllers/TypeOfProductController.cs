@@ -1,4 +1,4 @@
-﻿namespace WebAPI_ASP.NET6.Controllers
+﻿namespace WebAPI.Controllers
 {
     [Route("api/products/{productId}/typeofproducts")]
     [ApiController]
