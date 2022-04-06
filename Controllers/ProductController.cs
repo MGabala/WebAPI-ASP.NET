@@ -35,17 +35,19 @@ namespace WebApplication1.Controllers
             {
                 return NotFound();
             }
+         
+        }
 
-            //}
-            //Aktualizacja Description i Quantity
-            //[HttpPatch]
-            //public ActionResult<ProductDTO> UpdateProduct()
-            //{
-            //    return NoContent();
-            //}
+        //}
+        //Aktualizacja Description i Quantity
+        //[HttpPatch]
+        //public ActionResult<ProductDTO> UpdateProduct()
+        //{
+        //    return NoContent();
+        //}
 
-            //Usuwa produkt
-            [HttpDelete("{id}")]
+        //Usuwa produkt
+        [HttpDelete("{id}")]
         public ActionResult<ProductDTO> DeleteProduct(int id)
         {
             var product = ProductsStore.CurrentProduct.Products.FirstOrDefault(x=>x.Id==id);
