@@ -13,11 +13,6 @@ namespace WebApplication1.Controllers
             return Ok(ProductsStore.CurrentProduct.Products);
 
         }
-        [HttpGet]
-        public ActionResult<IEnumerable<ProductDTO>> GetProductsCount()
-        {
-            return Ok(ProductsStore.CurrentProduct.Products.Count);
-        }
         //Pobierz produkt o konkretnym ID
         [HttpGet("{id}")]
 
