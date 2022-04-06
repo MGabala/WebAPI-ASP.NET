@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using WebAPI_ASP.NET6.Models;
-using WebApplication1.Models;
-
-namespace WebApplication1.Controllers
+﻿namespace WebApplication1.Controllers
 {
     [ApiController, Route("api/products")]
     public class ProductController : ControllerBase

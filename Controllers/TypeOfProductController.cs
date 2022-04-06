@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using WebAPI_ASP.NET6.Models;
-using WebApplication1.Models;
-
-namespace WebAPI_ASP.NET6.Controllers
+﻿namespace WebAPI_ASP.NET6.Controllers
 {
     [Route("api/products/{productId}/typeofproducts")]
     [ApiController]

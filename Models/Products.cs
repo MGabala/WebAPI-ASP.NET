@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using WebAPI_ASP.NET6.Models;
-
-namespace WebApplication1.Models
+﻿namespace WebApplication1.Models
 {
     public class ProductDTO
     {
