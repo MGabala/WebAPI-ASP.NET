@@ -27,24 +27,25 @@ namespace WebApplication1.Controllers
             return Ok(productToreturn);
         }
         //Dodaj nowy produkt i go zwróć
-        //[HttpPost("{id}")]
-        //public ActionResult<ProductDTO> AddProduct(int id, ProductsCreation productCreation)
-        //{
-        //    var products = ProductsStore.CurrentProduct.Products.FirstOrDefault(x=>x.Id== id);
-        //    if(products== null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpPost("{id}")]
+        public ActionResult<ProductDTO> AddProduct(int id)
+        {
+            var products = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
+            if (products == null)
+            {
+                return NotFound();
+            }
 
-        //}
-        //Aktualizacja Description i Quantity
-        //[HttpPatch]
-        //public ActionResult<ProductDTO> UpdateProduct()
-        //{
-        //    return NoContent();
-        //}
-        //Usuwa produkt
-        [HttpDelete("{id}")]
+            //}
+            //Aktualizacja Description i Quantity
+            //[HttpPatch]
+            //public ActionResult<ProductDTO> UpdateProduct()
+            //{
+            //    return NoContent();
+            //}
+
+            //Usuwa produkt
+            [HttpDelete("{id}")]
         public ActionResult<ProductDTO> DeleteProduct(int id)
         {
             var product = ProductsStore.CurrentProduct.Products.FirstOrDefault(x=>x.Id==id);
@@ -54,7 +55,6 @@ namespace WebApplication1.Controllers
             }
             ProductsStore.CurrentProduct.Products.Remove(product);
             return NoContent();
-           
         }
     }
     
