@@ -25,7 +25,7 @@ namespace WebApplication1.Models
                 new ProductDTO()
                 {
                     Id = 1,
-                    Name = "First Product",
+                    Name = "Smartphone Light",
                     Desc = "This is description",
                     Quantity = 5,
                     TypeOfProduct = new List<TypeOfProduct>()
@@ -33,15 +33,16 @@ namespace WebApplication1.Models
                        new TypeOfProduct()
                        {
                            Id=1,
-                           Color="Red"
+                           Color="Red",
+                           Type = "Light Version"
                        }
                     }
-                    
+
                 },
                 new ProductDTO()
                 {
                     Id=2,
-                    Name = "Second Product",
+                    Name = "Smartphone Pro",
                     Desc = String.Empty,
                     Quantity  = 10,
                     TypeOfProduct= new List<TypeOfProduct>()
@@ -49,14 +50,15 @@ namespace WebApplication1.Models
                         new TypeOfProduct()
                         {
                             Id=2,
-                            Color="Blue"
+                            Color="Blue",
+                            Type = "Pro Version"
                         }
                     }
                 },
                  new ProductDTO()
                 {
                     Id=3,
-                    Name = "Third Product",
+                    Name = "Smartphone ",
                     Desc = "",
                     Quantity  = 12,
                     TypeOfProduct = new List<TypeOfProduct>()
@@ -64,7 +66,8 @@ namespace WebApplication1.Models
                         new TypeOfProduct()
                         {
                             Id=3,
-                            Color="Black"
+                            Color="Black",
+                            Type = "Default Version"
                         }
                     }
                 }
