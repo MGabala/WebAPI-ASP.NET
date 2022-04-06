@@ -19,5 +19,6 @@ namespace WebAPI_ASP.NET6.Controllers
             }
             return Ok(product.TypeOfProduct);
         }
+    
     }
 }

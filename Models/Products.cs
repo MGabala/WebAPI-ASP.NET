@@ -25,7 +25,7 @@ namespace WebApplication1.Models
                 new ProductDTO()
                 {
                     Id = 1,
-                    Name = "Smartphone Light",
+                    Name = "Smartphone A",
                     Desc = "This is description",
                     Quantity = 5,
                     TypeOfProduct = new List<TypeOfProduct>()
@@ -42,7 +42,7 @@ namespace WebApplication1.Models
                 new ProductDTO()
                 {
                     Id=2,
-                    Name = "Smartphone Pro",
+                    Name = "Smartphone B",
                     Desc = String.Empty,
                     Quantity  = 10,
                     TypeOfProduct= new List<TypeOfProduct>()
@@ -58,7 +58,7 @@ namespace WebApplication1.Models
                  new ProductDTO()
                 {
                     Id=3,
-                    Name = "Smartphone ",
+                    Name = "Smartphone C",
                     Desc = "",
                     Quantity  = 12,
                     TypeOfProduct = new List<TypeOfProduct>()
