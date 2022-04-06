@@ -25,28 +25,28 @@ namespace WebApplication1.Controllers
             }
             return Ok(productToreturn);
         }
-        //Dodaj nowy produkt i go zwróć
-        [HttpPost("{id}")]
-        public ActionResult<ProductDTO> AddProduct()
-        {
-            var products = ProductsStore.CurrentProduct.Products;
-            products.Add(new ProductDTO());
-            return Ok();
-            //  return NoContent();
-        }
-        //Aktualizacja Description i Quantity
-        [HttpPut]
-        public ActionResult<ProductDTO> UpdateProduct()
-        {
-            return NoContent();
-        }
-        //Usuwa produkt
-        [HttpDelete("{id}")]
-        public ActionResult<ProductDTO> DeleteProduct(int id)
-        {
-            var product = ProductsStore.CurrentProduct.Products;
-            product.RemoveAt(id);
-            return Ok(product);
-        }
+    //    //Dodaj nowy produkt i go zwróć
+    //    [HttpPost("{id}")]
+    //    public ActionResult<ProductDTO> AddProduct()
+    //    {
+    //        var products = ProductsStore.CurrentProduct.Products;
+    //        products.Add(new ProductDTO());
+    //        return Ok();
+    //        //  return NoContent();
+    //    }
+    //    //Aktualizacja Description i Quantity
+    //    [HttpPut]
+    //    public ActionResult<ProductDTO> UpdateProduct()
+    //    {
+    //        return NoContent();
+    //    }
+    //    //Usuwa produkt
+    //    [HttpDelete("{id}")]
+    //    public ActionResult<ProductDTO> DeleteProduct(int id)
+    //    {
+    //        var product = ProductsStore.CurrentProduct.Products;
+    //        product.RemoveAt(id);
+    //        return Ok(product);
+    //    }
     }
 }
