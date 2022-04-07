@@ -9,6 +9,7 @@
         public string? Desc { get; set; }
         public int Quantity { get; set; }
         public ICollection<TypeOfProduct> TypeOfProduct { get; set; } = new List<TypeOfProduct>();
+      
     }
 
     public class ProductsStore

@@ -22,16 +22,17 @@
             }
             return Ok(productToreturn);
         }
-        //Dodaj nowy produkt i go zwróć
+       
+        //Dodaj nowy typ produktu i go zwróć
         [HttpPost("{id}")]
-        public ActionResult<ProductDTO> CreateProductType(int id, TypeOfProductCreation productCreation)
+        public ActionResult<ProductDTO> CreateNewProductType(int id, TypeOfProductCreation productCreation)
         {
             var products = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
             if (products == null)
             {
                 return NotFound();
             }
-            var max = ProductsStore.CurrentProduct.Products.SelectMany(x=>x.TypeOfProduct).Max(x=>x.Id);
+            var max = ProductsStore.CurrentProduct.Products.SelectMany(x => x.TypeOfProduct).Max(x => x.Id);
             var final = new TypeOfProduct()
             {
                 Id = ++max,
