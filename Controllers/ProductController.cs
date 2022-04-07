@@ -24,14 +24,27 @@
         }
         //Dodaj nowy produkt i go zwróć
         [HttpPost("{id}")]
-        public ActionResult<ProductDTO> AddProduct(int id)
+        public ActionResult<ProductDTO> CreateProductType(int id, TypeOfProductCreation productCreation)
         {
             var products = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
             if (products == null)
             {
                 return NotFound();
             }
-         
+            var max = ProductsStore.CurrentProduct.Products.SelectMany(x=>x.TypeOfProduct).Max(x=>x.Id);
+            var final = new TypeOfProduct()
+            {
+                Id = ++max,
+                Color = productCreation.Color,
+                Type = productCreation.Type
+            };
+            products.TypeOfProduct.Add(final);
+            return Ok(
+                new
+                {
+                    Id = id,
+                    productCreation = final.Id
+                });
         }
 
         //}
