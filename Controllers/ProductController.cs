@@ -69,8 +69,30 @@
 
         //Aktualizacja 
         [HttpPatch("id")]
-        public ActionResult<ProductDTO> UpdateProduct()
+        public ActionResult<ProductDTO> UpdateProduct(int id, int typeid, JsonPatchDocument<TypeOfProductUpdate> patch)
         {
+            var products = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
+            if (products == null)
+            {
+                return NotFound();
+            }
+            var productBeforeUpdate = products.TypeOfProduct.FirstOrDefault(x=>x.Id== id);
+            if(productBeforeUpdate == null)
+            {
+                return NotFound();
+            }
+            var productUpdate = new TypeOfProductUpdate()
+            {
+                Color = productBeforeUpdate.Color,
+                Type = productBeforeUpdate.Type,
+            };
+            patch.ApplyTo(productUpdate, ModelState);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            productBeforeUpdate.Color = productUpdate.Color;
+            productBeforeUpdate.Type= productUpdate.Type;
             return NoContent();
         }
 
