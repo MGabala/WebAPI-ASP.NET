@@ -47,6 +47,24 @@
                     productCreation = final.Id
                 });
         }
+        //Aktualizacja typu produktu
+        [HttpPut("{id}")]
+        public ActionResult UpdateTypeOfProduct(int id, int typeid, TypeOfProductUpdate productUpdate)
+        {
+            var products = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
+            if(products == null)
+            {
+                return NotFound();
+            }
+            var type = products.TypeOfProduct.FirstOrDefault(x => x.Id == typeid);
+            if(type == null)
+            {
+                return NotFound();
+            }
+          type.Color = productUpdate.Color;
+            type.Type = productUpdate.Type;
+            return NoContent();
+        }
 
         //}
         //Aktualizacja Description i Quantity
