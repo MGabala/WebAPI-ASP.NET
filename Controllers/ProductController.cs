@@ -67,8 +67,8 @@
         }
 
 
-        //Aktualizacja 
-        [HttpPatch("id")]
+        //Update wartości
+        [HttpPatch("{id}")]
         public ActionResult<ProductDTO> UpdateProduct(int id, int typeid, JsonPatchDocument<TypeOfProductUpdate> patch)
         {
             var products = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
