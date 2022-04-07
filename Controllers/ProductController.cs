@@ -67,7 +67,7 @@
         }
 
 
-        //Aktualizacja Description i Quantity
+        //Aktualizacja 
         [HttpPatch("id")]
         public ActionResult<ProductDTO> UpdateProduct()
         {
