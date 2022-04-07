@@ -66,13 +66,13 @@
             return NoContent();
         }
 
-        //}
+
         //Aktualizacja Description i Quantity
-        //[HttpPatch]
-        //public ActionResult<ProductDTO> UpdateProduct()
-        //{
-        //    return NoContent();
-        //}
+        [HttpPatch("id")]
+        public ActionResult<ProductDTO> UpdateProduct()
+        {
+            return NoContent();
+        }
 
         //Usuwa produkt
         [HttpDelete("{id}")]
