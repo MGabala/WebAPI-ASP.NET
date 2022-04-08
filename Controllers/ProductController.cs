@@ -37,7 +37,8 @@
             var products = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
             if (products == null)
             {
-                return NotFound();
+            _logger.LogInformation($"There is no product with ID: {id}");
+            return NotFound();
             }
             var max = ProductsStore.CurrentProduct.Products.SelectMany(x => x.TypeOfProduct).Max(x => x.Id);
             var final = new TypeOfProduct()
@@ -61,12 +62,14 @@
             var products = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
             if(products == null)
             {
-                return NotFound();
+            _logger.LogInformation($"There is no product with ID: {id}");
+            return NotFound();
             }
             var type = products.TypeOfProduct.FirstOrDefault(x => x.Id == typeid);
             if(type == null)
             {
-                return NotFound();
+            _logger.LogInformation($"There is no product with ID: {type}");
+            return NotFound();
             }
           type.Color = productUpdate.Color;
             type.Type = productUpdate.Type;
@@ -81,7 +84,8 @@
             var products = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
             if (products == null)
             {
-                return NotFound();
+            _logger.LogInformation($"There is no product with ID: {id}");
+            return NotFound();
             }
             var productBeforeUpdate = products.TypeOfProduct.FirstOrDefault(x=>x.Id== id);
             if(productBeforeUpdate == null)
@@ -110,7 +114,8 @@
             var product = ProductsStore.CurrentProduct.Products.FirstOrDefault(x=>x.Id==id);
             if(product == null)
             {
-                return NotFound();
+            _logger.LogInformation($"There is no product with ID: {id}");
+            return NotFound();
             }
             ProductsStore.CurrentProduct.Products.Remove(product);
             return NoContent();

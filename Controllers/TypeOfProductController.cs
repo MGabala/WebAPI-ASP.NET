@@ -13,5 +13,4 @@
             }
             return Ok(product.TypeOfProduct);
         }
-    
     }
