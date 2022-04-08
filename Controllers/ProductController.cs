@@ -3,6 +3,12 @@
     [ApiController, Route("api/products")]
     public class ProductController : ControllerBase
     {
+        private readonly ILogger<ProductController> logger;
+
+        public ProductController(ILogger<ProductController> logger)
+        {
+           logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
         //Pobierz całą listę 
         [HttpGet]
         public ActionResult<IEnumerable<ProductDTO>> GetProducts()
@@ -18,7 +24,9 @@
             var productToreturn = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
             if (productToreturn == null)
             {
+                logger.LogInformation("City with id: not found");
                 return NotFound();
+                
             }
             return Ok(productToreturn);
         }
