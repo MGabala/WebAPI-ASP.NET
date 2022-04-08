@@ -1,5 +1,4 @@
-﻿namespace WebAPI.Controllers
-{
+﻿namespace WebAPI.Controllers;
     [ApiController, Route("api/products")]
     public class ProductController : ControllerBase
     {
@@ -117,5 +116,3 @@
             return NoContent();
         }
     }
-    
-}

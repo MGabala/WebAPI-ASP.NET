@@ -1,6 +1,5 @@
-﻿namespace WebAPI.Controllers
-{
-    [Route("api/products/{productId}/typeofproducts")]
+﻿namespace WebAPI.Controllers;
+[Route("api/products/{productId}/typeofproducts")]
     [ApiController]
     public class TypeOfProductController : ControllerBase
     {
@@ -16,4 +15,3 @@
         }
     
     }
-}

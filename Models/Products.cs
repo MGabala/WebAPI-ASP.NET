@@ -1,6 +1,5 @@
-﻿namespace WebAPI.Models
-{
-    public class ProductDTO
+﻿namespace WebAPI.Models;
+public class ProductDTO
     {
         public int Id { get; set; }
         [MaxLength(100)]
@@ -73,5 +72,3 @@
         }
 
     }
-
-}
