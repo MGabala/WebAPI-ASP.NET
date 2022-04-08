@@ -30,6 +30,8 @@
         {
         try
         {
+            //throw new Exception("Exception sample");
+           
             var productToreturn = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
             if (productToreturn == null)
             {
