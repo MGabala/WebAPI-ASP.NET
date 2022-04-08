@@ -12,7 +12,15 @@
         [HttpGet]
         public ActionResult<IEnumerable<ProductDTO>> GetProducts()
         {
+        try
+        {
             return Ok(ProductsStore.CurrentProduct.Products);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+            
 
         }
         //Pobierz produkt o konkretnym ID
@@ -20,14 +28,22 @@
 
         public ActionResult<ProductDTO> GetProduct(int id)
         {
+        try
+        {
             var productToreturn = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
             if (productToreturn == null)
             {
                 _logger.LogInformation($"There is no product with ID: {id}");
                 return NotFound();
-                
+
             }
             return Ok(productToreturn);
+        } 
+        catch (Exception ex)
+        {
+            _logger.LogCritical($"Its critical log", ex);
+            return StatusCode(500, "Problem with request");
+        }
         }
        
         //Dodaj nowy typ produktu i go zwróć
