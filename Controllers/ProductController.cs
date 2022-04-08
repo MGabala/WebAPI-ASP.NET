@@ -127,13 +127,21 @@
         [HttpDelete("{id}")]
         public ActionResult<ProductDTO> DeleteProduct(int id)
         {
-            var product = ProductsStore.CurrentProduct.Products.FirstOrDefault(x=>x.Id==id);
-            if(product == null)
+        try
+        {
+            var product = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
+            if (product == null)
             {
-            _logger.LogInformation($"There is no product with ID: {id}");
-            return NotFound();
+                _logger.LogInformation($"There is no product with ID: {id}");
+                return NotFound();
             }
             ProductsStore.CurrentProduct.Products.Remove(product);
             return NoContent();
+        }
+        catch (Exception ex)
+        {
+            _logger?.LogError($"There is an error");
+            return BadRequest(ex.Message);
+        }
         }
     }

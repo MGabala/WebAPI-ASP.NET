@@ -2,3 +2,4 @@
 global using Microsoft.AspNetCore.Mvc;
 global using WebAPI.Models;
 global using Microsoft.AspNetCore.JsonPatch;
+global using Serilog;
