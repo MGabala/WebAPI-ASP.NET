@@ -3,9 +3,11 @@
     public class ProductController : ControllerBase
     {
       private readonly ILogger<ProductController> _logger;
-        public ProductController(ILogger<ProductController> logger)
+      private readonly MailService _mailService;
+        public ProductController(ILogger<ProductController> logger, MailService mailService)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+           _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
         }
 
         //Pobierz całą listę 
@@ -138,6 +140,7 @@
                 return NotFound();
             }
             ProductsStore.CurrentProduct.Products.Remove(product);
+            _mailService.Send($"Product deleted.",$"Product with ID: {product.Id} was deleted.");
             return NoContent();
         }
         catch (Exception ex)
