@@ -3,8 +3,8 @@
     public class ProductController : ControllerBase
     {
       private readonly ILogger<ProductController> _logger;
-      private readonly MailService _mailService;
-        public ProductController(ILogger<ProductController> logger, MailService mailService)
+      private readonly IMailService _mailService;
+        public ProductController(ILogger<ProductController> logger, IMailService mailService)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
            _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
