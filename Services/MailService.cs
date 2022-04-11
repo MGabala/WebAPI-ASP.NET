@@ -6,7 +6,7 @@ public class MailService : IMailService
 
     public void Send(string subject, string message)
     {
-        Console.WriteLine($"Mail from {mailFrom} to {mailTo}"+$"with {nameof(MailService)}");
+        Console.WriteLine($"Mail from {mailFrom} to {mailTo}, "+$"with {nameof(MailService)}");
         Console.WriteLine($"Subject: {subject}");
         Console.WriteLine($"Message: {message}");
     }

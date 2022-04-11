@@ -15,7 +15,11 @@ builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+#if DEBUG
 builder.Services.AddTransient<IMailService,MailService>();
+#else
+builder.Services.AddTransient<IMailService, CloudMailService>();
+#endif
 builder.Host.UseSerilog();
 
 var app = builder.Build();
