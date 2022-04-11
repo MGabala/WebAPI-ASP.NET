@@ -4,10 +4,12 @@
     {
       private readonly ILogger<ProductController> _logger;
       private readonly IMailService _mailService;
-        public ProductController(ILogger<ProductController> logger, IMailService mailService)
+    private readonly ProductsStore _products;
+        public ProductController(ILogger<ProductController> logger, IMailService mailService, ProductsStore products)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
            _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
+        _products = products ?? throw new ArgumentNullException(nameof(products));
         }
 
         //Pobierz całą listę 
@@ -16,7 +18,7 @@
         {
         try
         {
-            return Ok(ProductsStore.CurrentProduct.Products);
+            return Ok(_products.Products);
         }
         catch (Exception ex)
         {
@@ -34,7 +36,7 @@
         {
             //throw new Exception("Exception sample");
            
-            var productToreturn = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
+            var productToreturn = _products.Products.FirstOrDefault(x => x.Id == id);
             if (productToreturn == null)
             {
                 _logger.LogInformation($"There is no product with ID: {id}");
@@ -54,13 +56,13 @@
         [HttpPost("{id}")]
         public ActionResult<ProductDTO> CreateNewProductType(int id, TypeOfProductCreation productCreation)
         {
-            var products = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
+            var products = _products.Products.FirstOrDefault(x => x.Id == id);
             if (products == null)
             {
             _logger.LogInformation($"There is no product with ID: {id}");
             return NotFound();
             }
-            var max = ProductsStore.CurrentProduct.Products.SelectMany(x => x.TypeOfProduct).Max(x => x.Id);
+            var max = _products.Products.SelectMany(x => x.TypeOfProduct).Max(x => x.Id);
             var final = new TypeOfProduct()
             {
                 Id = ++max,
@@ -79,7 +81,7 @@
         [HttpPut("{id}")]
         public ActionResult UpdateTypeOfProduct(int id, int typeid, TypeOfProductUpdate productUpdate)
         {
-            var products = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
+            var products = _products.Products.FirstOrDefault(x => x.Id == id);
             if(products == null)
             {
             _logger.LogInformation($"There is no product with ID: {id}");
@@ -101,7 +103,7 @@
         [HttpPatch("{id}")]
         public ActionResult<ProductDTO> UpdateProduct(int id, int typeid, JsonPatchDocument<TypeOfProductUpdate> patch)
         {
-            var products = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
+            var products = _products.Products.FirstOrDefault(x => x.Id == id);
             if (products == null)
             {
             _logger.LogInformation($"There is no product with ID: {id}");
@@ -133,13 +135,13 @@
         {
         try
         {
-            var product = ProductsStore.CurrentProduct.Products.FirstOrDefault(x => x.Id == id);
+            var product = _products.Products.FirstOrDefault(x => x.Id == id);
             if (product == null)
             {
                 _logger.LogInformation($"There is no product with ID: {id}");
                 return NotFound();
             }
-            ProductsStore.CurrentProduct.Products.Remove(product);
+            _products.Products.Remove(product);
             _mailService.Send($"Product deleted.",$"Product with ID: {product.Id} was deleted.");
             return NoContent();
         }

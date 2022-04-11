@@ -20,6 +20,7 @@ builder.Services.AddTransient<IMailService,MailService>();
 #else
 builder.Services.AddTransient<IMailService, CloudMailService>();
 #endif
+builder.Services.AddSingleton<ProductsStore>();
 builder.Host.UseSerilog();
 
 var app = builder.Build();

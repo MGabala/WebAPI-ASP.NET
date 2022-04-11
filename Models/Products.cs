@@ -14,7 +14,7 @@ public class ProductDTO
     public class ProductsStore
     {
         public List<ProductDTO> Products { get; set; }
-        public static ProductsStore CurrentProduct { get; } = new ProductsStore();
+        //public static ProductsStore CurrentProduct { get; } = new ProductsStore();
         public ProductsStore()
         {
             Products = new List<ProductDTO>()
