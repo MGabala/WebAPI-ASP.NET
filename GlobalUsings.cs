@@ -6,3 +6,5 @@ global using Serilog;
 global using WebAPI_ASP.NET6.Services;
 global using System.ComponentModel.DataAnnotations.Schema;
 global using Microsoft.EntityFrameworkCore;
+global using WebAPI_ASP.NET6.Db;
+global using WebAPI_ASP.NET6.Entities;
