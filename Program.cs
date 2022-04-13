@@ -23,7 +23,8 @@ builder.Services.AddTransient<IMailService,MailService>();
 builder.Services.AddTransient<IMailService, CloudMailService>();
 #endif
 builder.Services.AddSingleton<ProductsStore>();
-builder.Services.AddDbContext<ProductDb>(dbContextOptions => dbContextOptions.UseSqlite("Data Source =Product.db"));
+builder.Services.AddDbContext<ProductDb>(dbContextOptions => dbContextOptions.UseSqlite(
+    builder.Configuration["ConnectionStrings:ProductDbCS"]));
 builder.Host.UseSerilog();
 
 var app = builder.Build();
