@@ -8,9 +8,9 @@
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public Task<IEnumerable<Product>> GetAllProductsAsync()
+        public async Task<IEnumerable<Product>> GetAllProductsAsync()
         {
-            throw new NotImplementedException();
+           return await context.Products.OrderBy(x=>x.Id).ToListAsync();
         }
 
         public Task<Product?> GetProductAsync(int productId)
