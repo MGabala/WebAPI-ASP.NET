@@ -1,9 +1,4 @@
-
 //Logger
-
-
-
-
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .WriteTo.Console()
