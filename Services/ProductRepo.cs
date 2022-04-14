@@ -2,6 +2,12 @@
 {
     public class ProductRepo : IProductRepo
     {
+        private readonly ProductDb context;
+
+        public ProductRepo(ProductDb context)
+        {
+            this.context = context ?? throw new ArgumentNullException(nameof(context));
+        }
         public Task<IEnumerable<Product>> GetAllProductsAsync()
         {
             throw new NotImplementedException();
