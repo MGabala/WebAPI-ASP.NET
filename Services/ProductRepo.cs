@@ -13,17 +13,22 @@
            return await context.Products.OrderBy(x=>x.Id).ToListAsync();
         }
 
-        public Task<Product?> GetProductAsync(int productId)
+        public async Task<Product?> GetProductAsync(int productId, bool includeType)
+        {
+            if (includeType)
+            {
+                return await context.Products.Include(x=> x.TypeOfProduct)
+                    .Where(x=>x.Id==productId).FirstOrDefaultAsync();
+            }
+            return await context.Products.Where(x=>x.Id==productId).FirstOrDefaultAsync();
+        }
+
+        public async Task<TypeOfProduct?> GetTypeOfProduct(int productId, int typeofproductId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<TypeOfProduct?> GetTypeOfProduct(int productId, int typeofproductId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<TypeOfProduct>> GetTypeOfProductsAsync(int productId)
+        public async Task<IEnumerable<TypeOfProduct>> GetTypeOfProductsAsync(int productId)
         {
             throw new NotImplementedException();
         }
