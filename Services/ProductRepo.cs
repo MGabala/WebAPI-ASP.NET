@@ -2,25 +2,25 @@
 {
     public class ProductRepo : IProductRepo
     {
-        private readonly ProductDb context;
+        private readonly ProductDb _context;
 
         public ProductRepo(ProductDb context)
         {
-            this.context = context ?? throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
         public async Task<IEnumerable<Product>> GetAllProductsAsync()
         {
-           return await context.Products.OrderBy(x=>x.Id).ToListAsync();
+           return await _context.Products.OrderBy(x=>x.Id).ToListAsync();
         }
 
         public async Task<Product?> GetProductAsync(int productId, bool includeType)
         {
             if (includeType)
             {
-                return await context.Products.Include(x=> x.TypeOfProduct)
+                return await _context.Products.Include(x=> x.TypeOfProduct)
                     .Where(x=>x.Id==productId).FirstOrDefaultAsync();
             }
-            return await context.Products.Where(x=>x.Id==productId).FirstOrDefaultAsync();
+            return await _context.Products.Where(x=>x.Id==productId).FirstOrDefaultAsync();
         }
 
         public async Task<TypeOfProduct?> GetTypeOfProduct(int productId, int typeofproductId)

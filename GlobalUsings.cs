@@ -8,3 +8,4 @@ global using System.ComponentModel.DataAnnotations.Schema;
 global using Microsoft.EntityFrameworkCore;
 global using WebAPI_ASP.NET6.Db;
 global using WebAPI_ASP.NET6.Entities;
+global using WebAPI_ASP.NET6.Models;
