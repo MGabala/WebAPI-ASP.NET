@@ -77,15 +77,15 @@ public class ProductController : ControllerBase
     //    //    }
     //}
     //Usuwa produkt
-    [HttpDelete("{id}")]
-    public async Task<ActionResult<ProductDTO>> DeleteProduct(product)
-    {
-        if (!await _productRepo.ProductExistAsync(product))
-        {
-            return NotFound();
-        }
+    //[HttpDelete("{id}")]
+    //public async Task<ActionResult<ProductDTO>> DeleteProduct(product)
+    //{
+    //    if (!await _productRepo.ProductExistAsync(product))
+    //    {
+    //        return NotFound();
+    //    }
         
-        _productRepo.DeleteProduct(product);
+    //    _productRepo.DeleteProduct(product);
 
         //try
         //{
@@ -105,9 +105,6 @@ public class ProductController : ControllerBase
         //    return BadRequest(ex.Message);
         //}
     }
-}
-
-
 
 //    //Aktualizacja typu produktu
 //    [HttpPut("{id}")]
