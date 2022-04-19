@@ -8,5 +8,7 @@
         Task<IEnumerable<TypeOfProduct>> GetTypeOfProductsAsync(int productId);
         Task<TypeOfProduct?> GetTypeOfProduct(int productId, int typeofproductId);
         Task AddNewProduct(int productId);
+        void DeleteProduct(Product product);
+        Task<bool> SaveChangesAsync();
     }
 }
