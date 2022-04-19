@@ -7,11 +7,14 @@ public class ProductController : ControllerBase
     private readonly ILogger<ProductController> _logger;
     private readonly IMailService _mailService;
     private readonly IProductRepo _productRepo;
-    public ProductController(ILogger<ProductController> logger, IMailService mailService, IProductRepo productRepo)
+    private readonly IMapper _mapper;
+    public ProductController(ILogger<ProductController> logger, IMailService mailService, IProductRepo productRepo,
+                                IMapper mapper)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
         _productRepo = productRepo ?? throw new ArgumentNullException(nameof(productRepo));
+        _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
     //Pobierz całą listę 
@@ -19,19 +22,7 @@ public class ProductController : ControllerBase
     public async Task<ActionResult<IEnumerable<ProductWithoutType>>> GetProducts()
     {
         var productEntities = await _productRepo.GetAllProductsAsync();
-        var results = new List<ProductWithoutType>();
-        foreach (var productEntity in productEntities)
-        {
-            results.Add(new ProductWithoutType
-            {
-                Id = productEntity.Id,
-                Name = productEntity.Name,
-                Desc = productEntity.Desc,
-                Quantity = productEntity.Quantity,
-
-            });
-        }
-        return Ok(results);
+        return Ok(_mapper.Map<IEnumerable<ProductWithoutType>>(productEntities));
         //try
         //{
         //   // return Ok(_products.Products);
