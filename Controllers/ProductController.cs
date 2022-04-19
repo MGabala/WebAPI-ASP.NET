@@ -29,35 +29,19 @@ public class ProductController : ControllerBase
 
     public async Task<IActionResult> GetProduct(int id)
     {
+        try { 
         var product = await _productRepo.GetProductAsync(id);
         if(product == null)
         {
             return NotFound();
         }
         return Ok(_mapper.Map<ProductWithoutType>(product));
-
-        //try
-        //{
-        //    //throw new Exception("Exception sample");
-
-        //    var productToreturn = _products.Products.FirstOrDefault(x => x.Id == id);
-        //    if (productToreturn == null)
-        //    {
-        //        _logger.LogInformation($"There is no product with ID: {id}");
-        //        return NotFound();
-
-        //    }
-        //    return Ok(productToreturn);
-        //} 
-        //catch (Exception ex)
-        //{
-        //    _logger.LogCritical($"Its critical log", ex);
-        //    return StatusCode(500, "Problem with request");
-        //}
+        } 
+        catch (Exception ex) {
+            _logger.LogCritical($"Its critical log", ex);
+            return StatusCode(500,ex.Message);
+        }
     }
-}
-       
-       
     //    //Dodaj nowy typ produktu i go zwróć
     //    [HttpPost("{id}")]
     //    public ActionResult<ProductDTO> CreateNewProductType(int id, TypeOfProductCreation productCreation)
@@ -83,78 +67,82 @@ public class ProductController : ControllerBase
     //                productCreation = final.Id
     //            });
     //    }
-    //    //Aktualizacja typu produktu
-    //    [HttpPut("{id}")]
-    //    public ActionResult UpdateTypeOfProduct(int id, int typeid, TypeOfProductUpdate productUpdate)
-    //    {
-    //        var products = _products.Products.FirstOrDefault(x => x.Id == id);
-    //        if(products == null)
-    //        {
-    //        _logger.LogInformation($"There is no product with ID: {id}");
-    //        return NotFound();
-    //        }
-    //        var type = products.TypeOfProduct.FirstOrDefault(x => x.Id == typeid);
-    //        if(type == null)
-    //        {
-    //        _logger.LogInformation($"There is no product with ID: {type}");
-    //        return NotFound();
-    //        }
-    //      type.Color = productUpdate.Color;
-    //        type.Type = productUpdate.Type;
-    //        return NoContent();
-    //    }
+}
 
 
-    //    //Update wartości
-    //    [HttpPatch("{id}")]
-    //    public ActionResult<ProductDTO> UpdateProduct(int id, int typeid, JsonPatchDocument<TypeOfProductUpdate> patch)
-    //    {
-    //        var products = _products.Products.FirstOrDefault(x => x.Id == id);
-    //        if (products == null)
-    //        {
-    //        _logger.LogInformation($"There is no product with ID: {id}");
-    //        return NotFound();
-    //        }
-    //        var productBeforeUpdate = products.TypeOfProduct.FirstOrDefault(x=>x.Id== id);
-    //        if(productBeforeUpdate == null)
-    //        {
-    //            return NotFound();
-    //        }
-    //        var productUpdate = new TypeOfProductUpdate()
-    //        {
-    //            Color = productBeforeUpdate.Color,
-    //            Type = productBeforeUpdate.Type,
-    //        };
-    //        patch.ApplyTo(productUpdate, ModelState);
-    //        if (!ModelState.IsValid)
-    //        {
-    //            return BadRequest(ModelState);
-    //        }
-    //        productBeforeUpdate.Color = productUpdate.Color;
-    //        productBeforeUpdate.Type= productUpdate.Type;
-    //        return NoContent();
-    //    }
 
-    //    //Usuwa produkt
-    //    [HttpDelete("{id}")]
-    //    public ActionResult<ProductDTO> DeleteProduct(int id)
-    //    {
-    //    try
-    //    {
-    //        var product = _products.Products.FirstOrDefault(x => x.Id == id);
-    //        if (product == null)
-    //        {
-    //            _logger.LogInformation($"There is no product with ID: {id}");
-    //            return NotFound();
-    //        }
-    //        _products.Products.Remove(product);
-    //        _mailService.Send($"Product deleted.",$"Product with ID: {product.Id} was deleted.");
-    //        return NoContent();
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        _logger?.LogError($"There is an error");
-    //        return BadRequest(ex.Message);
-    //    }
-    //    }
-    //}
+//    //Aktualizacja typu produktu
+//    [HttpPut("{id}")]
+//    public ActionResult UpdateTypeOfProduct(int id, int typeid, TypeOfProductUpdate productUpdate)
+//    {
+//        var products = _products.Products.FirstOrDefault(x => x.Id == id);
+//        if(products == null)
+//        {
+//        _logger.LogInformation($"There is no product with ID: {id}");
+//        return NotFound();
+//        }
+//        var type = products.TypeOfProduct.FirstOrDefault(x => x.Id == typeid);
+//        if(type == null)
+//        {
+//        _logger.LogInformation($"There is no product with ID: {type}");
+//        return NotFound();
+//        }
+//      type.Color = productUpdate.Color;
+//        type.Type = productUpdate.Type;
+//        return NoContent();
+//    }
+
+
+//    //Update wartości
+//    [HttpPatch("{id}")]
+//    public ActionResult<ProductDTO> UpdateProduct(int id, int typeid, JsonPatchDocument<TypeOfProductUpdate> patch)
+//    {
+//        var products = _products.Products.FirstOrDefault(x => x.Id == id);
+//        if (products == null)
+//        {
+//        _logger.LogInformation($"There is no product with ID: {id}");
+//        return NotFound();
+//        }
+//        var productBeforeUpdate = products.TypeOfProduct.FirstOrDefault(x=>x.Id== id);
+//        if(productBeforeUpdate == null)
+//        {
+//            return NotFound();
+//        }
+//        var productUpdate = new TypeOfProductUpdate()
+//        {
+//            Color = productBeforeUpdate.Color,
+//            Type = productBeforeUpdate.Type,
+//        };
+//        patch.ApplyTo(productUpdate, ModelState);
+//        if (!ModelState.IsValid)
+//        {
+//            return BadRequest(ModelState);
+//        }
+//        productBeforeUpdate.Color = productUpdate.Color;
+//        productBeforeUpdate.Type= productUpdate.Type;
+//        return NoContent();
+//    }
+
+//    //Usuwa produkt
+//    [HttpDelete("{id}")]
+//    public ActionResult<ProductDTO> DeleteProduct(int id)
+//    {
+//    try
+//    {
+//        var product = _products.Products.FirstOrDefault(x => x.Id == id);
+//        if (product == null)
+//        {
+//            _logger.LogInformation($"There is no product with ID: {id}");
+//            return NotFound();
+//        }
+//        _products.Products.Remove(product);
+//        _mailService.Send($"Product deleted.",$"Product with ID: {product.Id} was deleted.");
+//        return NoContent();
+//    }
+//    catch (Exception ex)
+//    {
+//        _logger?.LogError($"There is an error");
+//        return BadRequest(ex.Message);
+//    }
+//    }
+//}
