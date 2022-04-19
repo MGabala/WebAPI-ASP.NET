@@ -13,13 +13,9 @@
            return await _context.Products.OrderBy(x=>x.Id).ToListAsync();
         }
 
-        public async Task<Product?> GetProductAsync(int productId, bool includeType)
+        public async Task<Product?> GetProductAsync(int productId)
         {
-            if (includeType)
-            {
-                return await _context.Products.Include(x=> x.TypeOfProduct)
-                    .Where(x=>x.Id==productId).FirstOrDefaultAsync();
-            }
+           
             return await _context.Products.Where(x=>x.Id==productId).FirstOrDefaultAsync();
         }
 

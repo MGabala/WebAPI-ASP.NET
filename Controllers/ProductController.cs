@@ -23,42 +23,40 @@ public class ProductController : ControllerBase
     {
         var productEntities = await _productRepo.GetAllProductsAsync();
         return Ok(_mapper.Map<IEnumerable<ProductWithoutType>>(productEntities));
+    }
+    //Pobierz produkt o konkretnym ID
+    [HttpGet("{id}")]
+
+    public async Task<ActionResult<ProductDTO>> GetProduct(int id)
+    {
+        var product = await _productRepo.GetProductAsync(id);
+        if(product == null)
+        {
+            return NotFound();
+        }
+        return Ok(_mapper.Map<ProductWithoutType>(product));
+
         //try
         //{
-        //   // return Ok(_products.Products);
-        //}
+        //    //throw new Exception("Exception sample");
+
+        //    var productToreturn = _products.Products.FirstOrDefault(x => x.Id == id);
+        //    if (productToreturn == null)
+        //    {
+        //        _logger.LogInformation($"There is no product with ID: {id}");
+        //        return NotFound();
+
+        //    }
+        //    return Ok(productToreturn);
+        //} 
         //catch (Exception ex)
         //{
-        //    return BadRequest(ex.Message);
+        //    _logger.LogCritical($"Its critical log", ex);
+        //    return StatusCode(500, "Problem with request");
         //}
-
-
     }
 }
-        //Pobierz produkt o konkretnym ID
-    //    [HttpGet("{id}")]
-
-    //    public ActionResult<ProductDTO> GetProduct(int id)
-    //    {
-    //    try
-    //    {
-    //        //throw new Exception("Exception sample");
-           
-    //        var productToreturn = _products.Products.FirstOrDefault(x => x.Id == id);
-    //        if (productToreturn == null)
-    //        {
-    //            _logger.LogInformation($"There is no product with ID: {id}");
-    //            return NotFound();
-
-    //        }
-    //        return Ok(productToreturn);
-    //    } 
-    //    catch (Exception ex)
-    //    {
-    //        _logger.LogCritical($"Its critical log", ex);
-    //        return StatusCode(500, "Problem with request");
-    //    }
-    //    }
+       
        
     //    //Dodaj nowy typ produktu i go zwróć
     //    [HttpPost("{id}")]
