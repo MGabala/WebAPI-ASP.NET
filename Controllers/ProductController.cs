@@ -43,30 +43,40 @@ public class ProductController : ControllerBase
         }
     }
     //    //Dodaj nowy typ produktu i go zwróć
-    //    [HttpPost("{id}")]
-    //    public ActionResult<ProductDTO> CreateNewProductType(int id, TypeOfProductCreation productCreation)
-    //    {
-    //        var products = _products.Products.FirstOrDefault(x => x.Id == id);
-    //        if (products == null)
-    //        {
-    //        _logger.LogInformation($"There is no product with ID: {id}");
-    //        return NotFound();
-    //        }
-    //        var max = _products.Products.SelectMany(x => x.TypeOfProduct).Max(x => x.Id);
-    //        var final = new TypeOfProduct()
-    //        {
-    //            Id = ++max,
-    //            Color = productCreation.Color,
-    //            Type = productCreation.Type
-    //        };
-    //        products.TypeOfProduct.Add(final);
-    //        return Ok(
-    //            new
-    //            {
-    //                Id = id,
-    //                productCreation = final.Id
-    //            });
-    //    }
+        [HttpPost("{id}")]
+        public async Task<ActionResult<ProductDTO>> CreateNewProduct(int id)
+        {
+          if(! await _productRepo.ProductExistAsync(id))
+        {
+            return NotFound();
+        }
+          var lastProduct = _mapper.Map<ProductWithoutType>(id);
+        //    [HttpPost("{id}")]
+        //    public ActionResult<ProductDTO> CreateNewProductType(int id, TypeOfProductCreation productCreation)
+        //    {
+        //        var products = _products.Products.FirstOrDefault(x => x.Id == id);
+        //        if (products == null)
+        //        {
+        //        _logger.LogInformation($"There is no product with ID: {id}");
+        //        return NotFound();
+        //        }
+        //        var max = _products.Products.SelectMany(x => x.TypeOfProduct).Max(x => x.Id);
+        //        var final = new TypeOfProduct()
+        //        {
+        //            Id = ++max,
+        //            Color = productCreation.Color,
+        //            Type = productCreation.Type
+        //        };
+        //        products.TypeOfProduct.Add(final);
+        //        return Ok(
+        //            new
+        //            {
+        //                Id = id,
+        //                productCreation = final.Id
+        //            });
+        //    }
+    }
+
 }
 
 

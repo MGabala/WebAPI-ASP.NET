@@ -8,6 +8,16 @@
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
+
+        public async Task<ProductWithoutType> AddNewProduct(int productId)
+        {
+           var product = await GetProductAsync(productId);
+            if(product != null)
+            {
+               
+            }
+        }
+
         public async Task<IEnumerable<Product>> GetAllProductsAsync()
         {
            return await _context.Products.OrderBy(x=>x.Id).ToListAsync();
@@ -25,6 +35,11 @@
         }
 
         public async Task<IEnumerable<TypeOfProduct>> GetTypeOfProductsAsync(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> ProductExistAsync(int productId)
         {
             throw new NotImplementedException();
         }
