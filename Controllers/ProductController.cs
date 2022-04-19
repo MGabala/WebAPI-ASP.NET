@@ -27,7 +27,7 @@ public class ProductController : ControllerBase
     //Pobierz produkt o konkretnym ID
     [HttpGet("{id}")]
 
-    public async Task<ActionResult<ProductDTO>> GetProduct(int id)
+    public async Task<IActionResult> GetProduct(int id)
     {
         var product = await _productRepo.GetProductAsync(id);
         if(product == null)
