@@ -21,6 +21,7 @@ builder.Services.AddSingleton<ProductsStore>();
 builder.Services.AddDbContext<ProductDb>(dbContextOptions => dbContextOptions.UseSqlite(
 builder.Configuration["ConnectionStrings:ProductDbCS"]));
 builder.Services.AddScoped<IProductRepo, ProductRepo>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Host.UseSerilog();
 
 var app = builder.Build();

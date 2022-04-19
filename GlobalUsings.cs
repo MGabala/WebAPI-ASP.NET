@@ -9,3 +9,4 @@ global using Microsoft.EntityFrameworkCore;
 global using WebAPI_ASP.NET6.Db;
 global using WebAPI_ASP.NET6.Entities;
 global using WebAPI_ASP.NET6.Models;
+global using AutoMapper;
