@@ -9,6 +9,15 @@
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        public async Task CreateProduct(int productId)
+        {
+            var product = await GetProductAsync(productId);
+            if(product != null)
+            {
+               _context.Products.Add(product);
+            }
+        }
+
         public void DeleteProductAsync(int productId)
         {
             throw new NotImplementedException();
