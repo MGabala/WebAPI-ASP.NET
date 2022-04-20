@@ -7,6 +7,6 @@ public class ProductDTO
         [MaxLength(200)]
         public string? Desc { get; set; }
         public int Quantity { get; set; }
-       
-      
-    }
+        public float Price { get; set; }
+
+}
