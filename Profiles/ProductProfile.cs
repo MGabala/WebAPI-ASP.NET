@@ -4,7 +4,6 @@
     {
         public ProductProfile()
         {
-            
             CreateMap<Entities.Product, Models.Product>();
         }
     }

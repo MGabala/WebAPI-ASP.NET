@@ -21,14 +21,12 @@
 
         public async Task<Product?> GetProductAsync(int productId)
         {
-           
-            return await _context.Products.Where(x=>x.Id==productId).FirstOrDefaultAsync();
+           return await _context.Products.Where(x=>x.Id == productId).FirstOrDefaultAsync();
         }
 
         public async Task<bool> ProductExistAsync(int productId)
         {
             return await _context.Products.AnyAsync(c => c.Id ==productId);
-
         }
 
         public async Task<bool> SaveChangesAsync()

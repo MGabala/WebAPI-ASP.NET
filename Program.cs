@@ -7,7 +7,7 @@ Log.Logger = new LoggerConfiguration()
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -17,10 +17,10 @@ builder.Services.AddTransient<IMailService,MailService>();
 #else
 builder.Services.AddTransient<IMailService, CloudMailService>();
 #endif
-builder.Services.AddDbContext<ProductDb>(dbContextOptions => dbContextOptions.UseSqlite(
-builder.Configuration["ConnectionStrings:ProductDbCS"]));
+builder.Services.AddDbContext<ProductDb>(dbContextOptions => dbContextOptions.
+                    UseSqlite(builder.Configuration["ConnectionStrings:ProductDbCS"]));
 builder.Services.AddScoped<IProductRepo, ProductRepo>();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Host.UseSerilog();
 
 var app = builder.Build();

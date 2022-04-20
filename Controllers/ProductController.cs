@@ -1,6 +1,4 @@
-﻿
-
-namespace WebAPI.Controllers;
+﻿namespace WebAPI.Controllers;
 [ApiController, Route("api/products")]
 public class ProductController : ControllerBase
 {
@@ -39,7 +37,7 @@ public class ProductController : ControllerBase
         try
         {
             var product = await _productRepo.GetProductAsync(id);
-            if (product == null)
+            if (!await _productRepo.ProductExistAsync(id))
             {
                 return NotFound();
             }
@@ -47,8 +45,8 @@ public class ProductController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogCritical($"Its critical log", ex);
-            return StatusCode(500, ex.Message);
+            _logger?.LogCritical("This is critical error");
+            return BadRequest(ex.Message);
         }
     }
 
