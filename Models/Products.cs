@@ -1,5 +1,5 @@
 ﻿namespace WebAPI_ASP.NET6.Models;
-public class ProductDTO
+public class Product
     {
         public int Id { get; set; }
         [MaxLength(100)]

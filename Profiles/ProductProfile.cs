@@ -5,7 +5,7 @@
         public ProductProfile()
         {
             
-            CreateMap<Entities.Product, Models.ProductDTO>();
+            CreateMap<Entities.Product, Models.Product>();
         }
     }
 }

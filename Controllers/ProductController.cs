@@ -27,6 +27,7 @@ public class ProductController : ControllerBase
     {
         var productEntities = await _productRepo.GetAllProductsAsync();
         return Ok(_mapper.Map<IEnumerable<Product>>(productEntities));
+        
     }
 
     //-------------------------------------------------------------------------------------//
