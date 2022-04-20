@@ -4,12 +4,14 @@ namespace WebAPI.Controllers;
 [ApiController, Route("api/products")]
 public class ProductController : ControllerBase
 {
-    private readonly ILogger<ProductController> _logger;
-    private readonly IMailService _mailService;
     private readonly IProductRepo _productRepo;
     private readonly IMapper _mapper;
-    public ProductController(ILogger<ProductController> logger, IMailService mailService, IProductRepo productRepo,
-                                IMapper mapper)
+    private readonly ILogger<ProductController> _logger;
+    private readonly IMailService _mailService;
+
+    //-------------------------------------------------------------------------------------//
+    public ProductController(IProductRepo productRepo, IMapper mapper,
+        ILogger<ProductController> logger, IMailService mailService)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
@@ -17,75 +19,51 @@ public class ProductController : ControllerBase
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
+    //-------------------------------------------------------------------------------------//
+
     //Pobierz całą listę 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductWithoutType>>> GetProducts()
+    public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
     {
         var productEntities = await _productRepo.GetAllProductsAsync();
-        return Ok(_mapper.Map<IEnumerable<ProductWithoutType>>(productEntities));
+        return Ok(_mapper.Map<IEnumerable<Product>>(productEntities));
     }
+
+    //-------------------------------------------------------------------------------------//
+
     //Pobierz produkt o konkretnym ID
     [HttpGet("{id}")]
-
     public async Task<IActionResult> GetProduct(int id)
     {
-        try { 
-        var product = await _productRepo.GetProductAsync(id);
-        if(product == null)
+        try
         {
-            return NotFound();
+            var product = await _productRepo.GetProductAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return Ok(_mapper.Map<Product>(product));
         }
-        return Ok(_mapper.Map<ProductWithoutType>(product));
-        } 
-        catch (Exception ex) {
+        catch (Exception ex)
+        {
             _logger.LogCritical($"Its critical log", ex);
-            return StatusCode(500,ex.Message);
+            return StatusCode(500, ex.Message);
         }
     }
-    //    //Dodaj nowy typ produktu i go zwróć
-    //    [HttpPost("{id}")]
-    //    public async Task<ActionResult<ProductDTO>> CreateNewProduct(int id)
-    //    {
-    //      if(! await _productRepo.ProductExistAsync(id))
-    //    {
-    //        return NotFound();
-    //    }
-    //      var lastProduct = _mapper.Map<ProductWithoutType>(id);
-    //    //    [HttpPost("{id}")]
-    //    //    public ActionResult<ProductDTO> CreateNewProductType(int id, TypeOfProductCreation productCreation)
-    //    //    {
-    //    //        var products = _products.Products.FirstOrDefault(x => x.Id == id);
-    //    //        if (products == null)
-    //    //        {
-    //    //        _logger.LogInformation($"There is no product with ID: {id}");
-    //    //        return NotFound();
-    //    //        }
-    //    //        var max = _products.Products.SelectMany(x => x.TypeOfProduct).Max(x => x.Id);
-    //    //        var final = new TypeOfProduct()
-    //    //        {
-    //    //            Id = ++max,
-    //    //            Color = productCreation.Color,
-    //    //            Type = productCreation.Type
-    //    //        };
-    //    //        products.TypeOfProduct.Add(final);
-    //    //        return Ok(
-    //    //            new
-    //    //            {
-    //    //                Id = id,
-    //    //                productCreation = final.Id
-    //    //            });
-    //    //    }
-    //}
+
+    //-------------------------------------------------------------------------------------//
     //Usuwa produkt
     //[HttpDelete("{id}")]
-    //public async Task<ActionResult<ProductDTO>> DeleteProduct(product)
+    //public async Task<IActionResult> DeleteProduct(int id)
     //{
-    //    if (!await _productRepo.ProductExistAsync(product))
+    //    var product = await _productRepo.GetProductAsync(id);
+    //    if (!await _productRepo.ProductExistAsync(id))
     //    {
     //        return NotFound();
     //    }
-        
-    //    _productRepo.DeleteProduct(product);
+       
+
+        //_productRepo.DeleteProduct(product);
 
         //try
         //{
@@ -105,6 +83,48 @@ public class ProductController : ControllerBase
         //    return BadRequest(ex.Message);
         //}
     }
+
+
+
+
+
+
+
+////Dodaj nowy typ produktu i go zwróć
+//[HttpPost("{id}")]
+//public async Task<ActionResult<ProductDTO>> CreateNewProduct(int id)
+//{
+//    if (!await _productRepo.ProductExistAsync(id))
+//    {
+//        return NotFound();
+//    }
+//    var lastProduct = _mapper.Map<ProductWithoutType>(id);
+//    [HttpPost("{id}")]
+//    public ActionResult<ProductDTO> CreateNewProductType(int id, TypeOfProductCreation productCreation)
+//    {
+//        var products = _products.Products.FirstOrDefault(x => x.Id == id);
+//        if (products == null)
+//        {
+//        _logger.LogInformation($"There is no product with ID: {id}");
+//        return NotFound();
+//        }
+//        var max = _products.Products.SelectMany(x => x.TypeOfProduct).Max(x => x.Id);
+//        var final = new TypeOfProduct()
+//        {
+//            Id = ++max,
+//            Color = productCreation.Color,
+//            Type = productCreation.Type
+//        };
+//        products.TypeOfProduct.Add(final);
+//        return Ok(
+//            new
+//            {
+//                Id = id,
+//                productCreation = final.Id
+//            });
+//    }
+
+
 
 //    //Aktualizacja typu produktu
 //    [HttpPut("{id}")]

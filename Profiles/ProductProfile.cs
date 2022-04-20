@@ -4,7 +4,9 @@
     {
         public ProductProfile()
         {
-            CreateMap<Entities.Product, Models.ProductWithoutType>();
+            
+            CreateMap<Entities.Product, Models.ProductDTO>();
         }
     }
 }
+

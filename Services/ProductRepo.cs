@@ -8,9 +8,10 @@
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-       public void DeleteProduct(Product product)
+
+        public void DeleteProductAsync(int productId)
         {
-            _context.Products.Remove(product);
+            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<Product>> GetAllProductsAsync()
@@ -24,16 +25,6 @@
             return await _context.Products.Where(x=>x.Id==productId).FirstOrDefaultAsync();
         }
 
-        public async Task<TypeOfProduct?> GetTypeOfProduct(int productId, int typeofproductId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<TypeOfProduct>> GetTypeOfProductsAsync(int productId)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<bool> ProductExistAsync(int productId)
         {
             return await _context.Products.AnyAsync(c => c.Id ==productId);
@@ -43,11 +34,6 @@
         public async Task<bool> SaveChangesAsync()
         {
            return (await _context.SaveChangesAsync() >= 0);
-        }
-
-        Task IProductRepo.AddNewProduct(int productId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

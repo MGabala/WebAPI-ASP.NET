@@ -10,11 +10,10 @@
         public string? Desc { get; set; }
         public int Quantity { get; set; }
         public float Price { get; set; }
-        public ICollection<TypeOfProduct> TypeOfProduct { get; set; } = new List<TypeOfProduct>();
+        
 
-    public Product(string name)
-    {
+        public Product(string name)
+        {
         Name = name;
-    }
-
+        }
     }
