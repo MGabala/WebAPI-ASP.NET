@@ -10,14 +10,15 @@
         }
 
         public async Task CreateProduct(Product product)
-        { //await db.Items.AddAsync(item)
+        { 
             await _context.Products.AddAsync(product);
 
         }
 
-        public void DeleteProductAsync(int productId)
+        public Task DeleteProductAsync(Product product)
         {
-            throw new NotImplementedException();
+            _context.Products.Remove(product);
+            return Task.CompletedTask;
         }
 
         public async Task<IEnumerable<Product>> GetAllProductsAsync()

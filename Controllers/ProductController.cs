@@ -25,7 +25,7 @@ public class ProductController : ControllerBase
     {
         var productEntities = await _productRepo.GetAllProductsAsync();
         return Ok(_mapper.Map<IEnumerable<Product>>(productEntities));
-        
+
     }
 
     //-------------------------------------------------------------------------------------//
@@ -62,41 +62,14 @@ public class ProductController : ControllerBase
 
     //-------------------------------------------------------------------------------------//
 
-
-
-
     //Usuwa produkt
-    //[HttpDelete("{id}")]
-    //public async Task<IActionResult> DeleteProduct(int id)
-    //{
-    //    var product = await _productRepo.GetProductAsync(id);
-    //    if (!await _productRepo.ProductExistAsync(id))
-    //    {
-    //        return NotFound();
-    //    }
-
-
-    //_productRepo.DeleteProduct(product);
-
-    //try
-    //{
-    //    var product = _products.Products.FirstOrDefault(x => x.Id == id);
-    //    if (product == null)
-    //    {
-    //        _logger.LogInformation($"There is no product with ID: {id}");
-    //        return NotFound();
-    //    }
-    //    _products.Products.Remove(product);
-    //    _mailService.Send($"Product deleted.", $"Product with ID: {product.Id} was deleted.");
-    //    return NoContent();
-    //}
-    //catch (Exception ex)
-    //{
-    //    _logger?.LogError($"There is an error");
-    //    return BadRequest(ex.Message);
-    //}
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<Product>> DeleteProduct(Product id)
+    {
+        await _productRepo.DeleteProductAsync(id);
+        return Ok();
+    }
 }
-
 
 
 
