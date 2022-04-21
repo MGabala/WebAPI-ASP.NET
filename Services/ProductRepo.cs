@@ -9,13 +9,10 @@
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task CreateProduct(int productId)
-        {
-            var product = await GetProductAsync(productId);
-            if(product != null)
-            {
-               _context.Products.Add(product);
-            }
+        public async Task CreateProduct(Product product)
+        { //await db.Items.AddAsync(item)
+            await _context.Products.AddAsync(product);
+
         }
 
         public void DeleteProductAsync(int productId)

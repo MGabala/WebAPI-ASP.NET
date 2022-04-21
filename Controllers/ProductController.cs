@@ -52,14 +52,12 @@ public class ProductController : ControllerBase
 
     //-------------------------------------------------------------------------------------//
     //Dodaj nowy produkt
-    [HttpPost("{id}")]
-    public async Task<ActionResult<Product>> CreateNewProduct(int id)
+    [HttpPost]
+    public async Task<ActionResult<Product>> CreateNewProduct(Product id)
     {
-        if (!await _productRepo.ProductExistAsync(id))
-        {
-            return NotFound();
-        }
-     
+        await _productRepo.CreateProduct(id);
+        await _productRepo.SaveChangesAsync();
+        return Ok();
     }
 
     //-------------------------------------------------------------------------------------//
