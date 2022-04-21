@@ -64,10 +64,11 @@ public class ProductController : ControllerBase
 
     //Usuwa produkt
     [HttpDelete("{id}")]
-    public async Task<ActionResult<Product>> DeleteProduct(Product id)
+    public async Task<ActionResult<Product>> DeleteProduct(int id)
     {
         await _productRepo.DeleteProductAsync(id);
-        return Ok();
+        await _productRepo.SaveChangesAsync();
+        return Ok(id);
     }
 }
 

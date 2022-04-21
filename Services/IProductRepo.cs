@@ -6,7 +6,7 @@
         Task<Product?> GetProductAsync(int productId);
         Task<bool> ProductExistAsync(int productId);
         Task<bool> SaveChangesAsync();
-        Task DeleteProductAsync(Product product);
+        Task DeleteProductAsync(int product);
         Task CreateProduct(Product product);
     }
 }

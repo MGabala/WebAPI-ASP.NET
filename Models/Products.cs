@@ -1,7 +1,7 @@
 ﻿namespace WebAPI_ASP.NET6.Models;
 public class Product
     {
-        public int Id { get; set; }
+        public int ProductId { get; set; }
         [MaxLength(100)]
         public string? Name { get; set; }
         [MaxLength(200)]

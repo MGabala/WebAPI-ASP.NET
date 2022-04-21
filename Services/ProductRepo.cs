@@ -15,10 +15,11 @@
 
         }
 
-        public Task DeleteProductAsync(Product product)
+        public async Task DeleteProductAsync(int id)
         {
-            _context.Products.Remove(product);
-            return Task.CompletedTask;
+            var _product = await _context.Products.FirstOrDefaultAsync(x=>x.Id == id);
+             _context.Remove(_product);
+            
         }
 
         public async Task<IEnumerable<Product>> GetAllProductsAsync()

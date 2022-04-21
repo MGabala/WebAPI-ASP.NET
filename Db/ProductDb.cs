@@ -1,4 +1,6 @@
-﻿namespace WebAPI_ASP.NET6.Db;
+﻿
+
+namespace WebAPI_ASP.NET6.Db;
 
 public class ProductDb : DbContext
 {

@@ -44,6 +44,21 @@ namespace WebAPI_ASP.NET6.Migrations
 
                     b.ToTable("Products");
                 });
+
+            modelBuilder.Entity("WebAPI_ASP.NET6.Entities.TestClass", b =>
+                {
+                    b.Property<int>("TestClassId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TestName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("TestClassId");
+
+                    b.ToTable("TestClasss");
+                });
 #pragma warning restore 612, 618
         }
     }
