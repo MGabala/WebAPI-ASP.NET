@@ -14,7 +14,7 @@
             await _context.Products.AddAsync(product);
 
         }
-
+        
         public async Task DeleteProductAsync(int id)
         {
             var _product = await _context.Products.FirstOrDefaultAsync(x=>x.Id == id);
