@@ -86,7 +86,7 @@ public class ProductController : ControllerBase
         {
             return NotFound();
         }
-        
+        _productRepo.UpdateProduct(id, products);
         await _productRepo.SaveChangesAsync();
         return NoContent();
 

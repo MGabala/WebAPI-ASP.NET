@@ -14,9 +14,11 @@
             await _context.Products.AddAsync(product);
 
         }
-        public Task UpdateProduct(Product product)
+        public async Task UpdateProduct(int id, Product product)
         {
-            throw new NotImplementedException();
+           var products = await _context.Products.FirstOrDefaultAsync(x=>x.Id == id);
+            _context.Products.Update(products);
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteProductAsync(int id)
