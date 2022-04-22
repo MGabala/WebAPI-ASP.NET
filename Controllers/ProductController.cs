@@ -86,7 +86,7 @@ public class ProductController : ControllerBase
         {
             return NotFound();
         }
-        _mapper.Map(product, products);
+        
         await _productRepo.SaveChangesAsync();
         return NoContent();
 
