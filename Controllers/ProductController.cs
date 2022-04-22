@@ -19,7 +19,7 @@ public class ProductController : ControllerBase
 
     //-------------------------------------------------------------------------------------//
 
-    //Pobierz całą listę 
+    //Get whole list 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
     {
@@ -57,7 +57,7 @@ public class ProductController : ControllerBase
     {
         await _productRepo.CreateProduct(id);
         await _productRepo.SaveChangesAsync();
-        return Ok();
+        return Ok(id);
     }
 
     //-------------------------------------------------------------------------------------//
@@ -70,6 +70,44 @@ public class ProductController : ControllerBase
         await _productRepo.SaveChangesAsync();
         return Ok(id);
     }
+
+    //-------------------------------------------------------------------------------------//
+
+    //Aktualizacja typu produktu
+    [HttpPut("{id}")]
+    public async Task<ActionResult> UpdateTypeOfProduct(int id, Product product)
+    {
+        if (!await _productRepo.ProductExistAsync(id))
+        {
+            return NotFound();
+        }
+        var products = await _productRepo.GetProductAsync(id);
+        if (!await _productRepo.ProductExistAsync(id))
+        {
+            return NotFound();
+        }
+        _mapper.Map(product, products);
+        await _productRepo.SaveChangesAsync();
+        return NoContent();
+
+        //var products = _products.Products.FirstOrDefault(x => x.Id == id);
+        //if (products == null)
+        //{
+        //    _logger.LogInformation($"There is no product with ID: {id}");
+        //    return NotFound();
+        //}
+        //var type = products.TypeOfProduct.FirstOrDefault(x => x.Id == typeid);
+        //if (type == null)
+        //{
+        //    _logger.LogInformation($"There is no product with ID: {type}");
+        //    return NotFound();
+        //}
+        //type.Color = productUpdate.Color;
+        //type.Type = productUpdate.Type;
+        //return NoContent();
+    }
+
+    //-------------------------------------------------------------------------------------//
 }
 
 
@@ -80,26 +118,6 @@ public class ProductController : ControllerBase
 
 
 
-//    //Aktualizacja typu produktu
-//    [HttpPut("{id}")]
-//    public ActionResult UpdateTypeOfProduct(int id, int typeid, TypeOfProductUpdate productUpdate)
-//    {
-//        var products = _products.Products.FirstOrDefault(x => x.Id == id);
-//        if(products == null)
-//        {
-//        _logger.LogInformation($"There is no product with ID: {id}");
-//        return NotFound();
-//        }
-//        var type = products.TypeOfProduct.FirstOrDefault(x => x.Id == typeid);
-//        if(type == null)
-//        {
-//        _logger.LogInformation($"There is no product with ID: {type}");
-//        return NotFound();
-//        }
-//      type.Color = productUpdate.Color;
-//        type.Type = productUpdate.Type;
-//        return NoContent();
-//    }
 
 
 //    //Update wartości
