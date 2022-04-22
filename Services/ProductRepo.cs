@@ -16,8 +16,7 @@
         }
         public Task UpdateProduct(Product product)
         {
-            var _product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
-            _context.Products.Update(product);
+            throw new NotImplementedException();
         }
 
         public async Task DeleteProductAsync(int id)
