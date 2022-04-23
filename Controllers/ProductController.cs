@@ -113,46 +113,31 @@ public class ProductController : ControllerBase
 
     //Update wartości
     [HttpPatch("{id}")]
-    public async Task<ActionResult<Product>> UpdateProduct(int id, int typeid, JsonPatchDocument<TypeOfProductUpdate> patch)
+    public async Task<ActionResult<Product>> UpdateProduct(int id, JsonPatchDocument<Product> patch)
     {
-        var products = _products.Products.FirstOrDefault(x => x.Id == id);
-        if (products == null)
-        {
-            _logger.LogInformation($"There is no product with ID: {id}");
-            return NotFound();
-        }
-        var productBeforeUpdate = products.TypeOfProduct.FirstOrDefault(x => x.Id == id);
-        if (productBeforeUpdate == null)
+        if (!await _productRepo.ProductExistAsync(id))
         {
             return NotFound();
         }
-        var productUpdate = new TypeOfProductUpdate()
+        var productEntity = await _productRepo.GetProductAsync(id);
+        if (productEntity == null)
         {
-            Color = productBeforeUpdate.Color,
-            Type = productBeforeUpdate.Type,
-        };
-        patch.ApplyTo(productUpdate, ModelState);
+            return NotFound();
+        }
+        var finalProductUpdate = _mapper.Map<Product>(productEntity);
+        patch.ApplyTo(finalProductUpdate, ModelState);
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        productBeforeUpdate.Color = productUpdate.Color;
-        productBeforeUpdate.Type = productUpdate.Type;
+        if (!TryValidateModel(finalProductUpdate))
+        {
+            return BadRequest(ModelState);
+        }
+        _mapper.Map(finalProductUpdate,productEntity);
+        await _productRepo.SaveChangesAsync();
         return NoContent();
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
+//
 

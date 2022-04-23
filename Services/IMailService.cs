@@ -5,3 +5,4 @@
         void Send(string subject, string message);
     }
 }
+//
