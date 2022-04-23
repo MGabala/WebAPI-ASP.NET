@@ -61,18 +61,6 @@ public class ProductController : ControllerBase
     }
 
     //-------------------------------------------------------------------------------------//
-    
-    //Usuwa produkt
-    [HttpDelete("{id}")]
-    public async Task<ActionResult<Product>> DeleteProduct(int id)
-    {
-        await _productRepo.DeleteProductAsync(id);
-        await _productRepo.SaveChangesAsync();
-        return Ok(id);
-    }
-
-    //-------------------------------------------------------------------------------------//
-
     //Aktualizacja typu produktu
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateTypeOfProduct(int id, Product product)
@@ -80,16 +68,16 @@ public class ProductController : ControllerBase
         if (!await _productRepo.ProductExistAsync(id))
         {
             return NotFound();
-        } 
+        }
         var producttoUpdate = await _productRepo.GetProductAsync(id);
-        if(producttoUpdate == null)
+        if (producttoUpdate == null)
         {
             return NotFound();
         }
-        _mapper.Map(product,producttoUpdate);
+        _mapper.Map(product, producttoUpdate);
         await _productRepo.SaveChangesAsync();
 
-        return NoContent();
+        return Ok(product);
         //var products = _products.Products.FirstOrDefault(x => x.Id == id);
         //if (products == null)
         //{
@@ -106,6 +94,18 @@ public class ProductController : ControllerBase
         //type.Type = productUpdate.Type;
         //return NoContent();
     }
+
+    //-------------------------------------------------------------------------------------//
+
+    //Usuwa produkt
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<Product>> DeleteProduct(int id)
+    {
+        await _productRepo.DeleteProductAsync(id);
+        await _productRepo.SaveChangesAsync();
+        return Ok(id);
+    }
+
 
     //-------------------------------------------------------------------------------------//
 }
