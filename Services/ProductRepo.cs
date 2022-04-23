@@ -14,12 +14,6 @@
             await _context.Products.AddAsync(product);
 
         }
-        public async Task UpdateProduct(int id, Product product)
-        {
-           var products = await _context.Products.FirstOrDefaultAsync(x=>x.Id == id);
-            _context.Products.Update(products);
-            await _context.SaveChangesAsync();
-        }
 
         public async Task DeleteProductAsync(int id)
         {
@@ -45,7 +39,7 @@
 
         public async Task<bool> SaveChangesAsync()
         {
-            return (await _context.SaveChangesAsync() >= 0);
+            return (await _context.SaveChangesAsync()>=0);
         }
     }
 }

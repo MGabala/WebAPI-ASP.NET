@@ -8,6 +8,5 @@
         Task<bool> SaveChangesAsync();
         Task DeleteProductAsync(int product);
         Task CreateProduct(Product product);
-        Task UpdateProduct(int id, Product product);
     }
 }

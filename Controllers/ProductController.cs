@@ -80,16 +80,16 @@ public class ProductController : ControllerBase
         if (!await _productRepo.ProductExistAsync(id))
         {
             return NotFound();
-        }
-        var products = await _productRepo.GetProductAsync(id);
-        if (!await _productRepo.ProductExistAsync(id))
+        } 
+        var producttoUpdate = await _productRepo.GetProductAsync(id);
+        if(producttoUpdate == null)
         {
             return NotFound();
         }
-        _productRepo.UpdateProduct(id, products);
+        _mapper.Map(product,producttoUpdate);
         await _productRepo.SaveChangesAsync();
-        return NoContent();
 
+        return NoContent();
         //var products = _products.Products.FirstOrDefault(x => x.Id == id);
         //if (products == null)
         //{
