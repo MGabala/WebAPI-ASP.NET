@@ -1,4 +1,6 @@
-﻿namespace WebAPI.Controllers;
+﻿
+
+namespace WebAPI.Controllers;
 [ApiController, Route("api/products")]
 public class ProductController : ControllerBase
 {
@@ -74,7 +76,7 @@ public class ProductController : ControllerBase
         {
             return NotFound();
         }
-        _mapper.Map(product, producttoUpdate);
+        _mapper.Map(producttoUpdate, product);
         await _productRepo.SaveChangesAsync();
 
         return Ok(product);
@@ -108,6 +110,38 @@ public class ProductController : ControllerBase
 
 
     //-------------------------------------------------------------------------------------//
+
+    //Update wartości
+    [HttpPatch("{id}")]
+    public async Task<ActionResult<Product>> UpdateProduct(int id, int typeid, JsonPatchDocument<TypeOfProductUpdate> patch)
+    {
+        var products = _products.Products.FirstOrDefault(x => x.Id == id);
+        if (products == null)
+        {
+            _logger.LogInformation($"There is no product with ID: {id}");
+            return NotFound();
+        }
+        var productBeforeUpdate = products.TypeOfProduct.FirstOrDefault(x => x.Id == id);
+        if (productBeforeUpdate == null)
+        {
+            return NotFound();
+        }
+        var productUpdate = new TypeOfProductUpdate()
+        {
+            Color = productBeforeUpdate.Color,
+            Type = productBeforeUpdate.Type,
+        };
+        patch.ApplyTo(productUpdate, ModelState);
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        productBeforeUpdate.Color = productUpdate.Color;
+        productBeforeUpdate.Type = productUpdate.Type;
+        return NoContent();
+    }
+
+
 }
 
 
@@ -120,35 +154,5 @@ public class ProductController : ControllerBase
 
 
 
-//    //Update wartości
-//    [HttpPatch("{id}")]
-//    public ActionResult<ProductDTO> UpdateProduct(int id, int typeid, JsonPatchDocument<TypeOfProductUpdate> patch)
-//    {
-//        var products = _products.Products.FirstOrDefault(x => x.Id == id);
-//        if (products == null)
-//        {
-//        _logger.LogInformation($"There is no product with ID: {id}");
-//        return NotFound();
-//        }
-//        var productBeforeUpdate = products.TypeOfProduct.FirstOrDefault(x=>x.Id== id);
-//        if(productBeforeUpdate == null)
-//        {
-//            return NotFound();
-//        }
-//        var productUpdate = new TypeOfProductUpdate()
-//        {
-//            Color = productBeforeUpdate.Color,
-//            Type = productBeforeUpdate.Type,
-//        };
-//        patch.ApplyTo(productUpdate, ModelState);
-//        if (!ModelState.IsValid)
-//        {
-//            return BadRequest(ModelState);
-//        }
-//        productBeforeUpdate.Color = productUpdate.Color;
-//        productBeforeUpdate.Type= productUpdate.Type;
-//        return NoContent();
-//    }
 
 
-//}

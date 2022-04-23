@@ -7,3 +7,4 @@ global using Microsoft.EntityFrameworkCore;
 global using WebAPI_ASP.NET6.Db;
 global using WebAPI_ASP.NET6.Entities;
 global using AutoMapper;
+global using Microsoft.AspNetCore.JsonPatch;
