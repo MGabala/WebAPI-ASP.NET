@@ -21,7 +21,7 @@ public class ProductController : ControllerBase
 
     //-------------------------------------------------------------------------------------//
 
-    //Get whole list 
+    //Pobierz całą listę
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
     {
@@ -80,21 +80,7 @@ public class ProductController : ControllerBase
         await _productRepo.SaveChangesAsync();
 
         return Ok(product);
-        //var products = _products.Products.FirstOrDefault(x => x.Id == id);
-        //if (products == null)
-        //{
-        //    _logger.LogInformation($"There is no product with ID: {id}");
-        //    return NotFound();
-        //}
-        //var type = products.TypeOfProduct.FirstOrDefault(x => x.Id == typeid);
-        //if (type == null)
-        //{
-        //    _logger.LogInformation($"There is no product with ID: {type}");
-        //    return NotFound();
-        //}
-        //type.Color = productUpdate.Color;
-        //type.Type = productUpdate.Type;
-        //return NoContent();
+
     }
 
     //-------------------------------------------------------------------------------------//
