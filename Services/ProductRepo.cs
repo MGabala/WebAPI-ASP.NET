@@ -26,14 +26,26 @@
         {
            return await _context.Products.OrderBy(x=>x.Id).ToListAsync();
         }
-        public async Task<IEnumerable<Product>> GetAllProductsAsync(string? name)
+        public async Task<IEnumerable<Product>> GetAllProductsAsync(string? name, string? searchQuery)
         {
-            if (string.IsNullOrWhiteSpace(name))
+           if(string.IsNullOrEmpty(name)
+                && string.IsNullOrEmpty(searchQuery))
             {
                 return await GetAllProductsAsync();
             }
-            name = name.Trim();
-            return await _context.Products.Where(x=>x.Name == name).OrderBy(x=>x.Id).ToListAsync();
+           var collection = _context.Products as IQueryable<Product>;
+            if (!string.IsNullOrEmpty(name))
+            {
+                name = name.Trim();
+                collection = collection.Where(x=>x.Name == name);
+            }
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                searchQuery = searchQuery.Trim();
+                collection = collection.Where(x => x.Name.Contains(searchQuery)
+                || (x.Desc != null && x.Desc.Contains(searchQuery)));
+            }
+            return await collection.OrderBy(x=>x.Name).ToListAsync();
         }
 
         public async Task<Product?> GetProductAsync(int productId)

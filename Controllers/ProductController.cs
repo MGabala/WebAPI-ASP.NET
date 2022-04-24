@@ -22,10 +22,11 @@ public class ProductController : ControllerBase
     //-------------------------------------------------------------------------------------//
 
     //Pobierz całą listę
+    //Use search and filter: ?name=<> / ?searchQuery=<>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProducts([FromQuery] string? name)
+    public async Task<ActionResult<IEnumerable<Product>>> GetProducts([FromQuery] string? name, string? searchQuery)
     {
-        var productEntities = await _productRepo.GetAllProductsAsync(name);
+        var productEntities = await _productRepo.GetAllProductsAsync(name, searchQuery);
         return Ok(_mapper.Map<IEnumerable<Product>>(productEntities));
 
     }
