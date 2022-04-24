@@ -26,6 +26,15 @@
         {
            return await _context.Products.OrderBy(x=>x.Id).ToListAsync();
         }
+        public async Task<IEnumerable<Product>> GetAllProductsAsync(string? name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return await GetAllProductsAsync();
+            }
+            name = name.Trim();
+            return await _context.Products.Where(x=>x.Name == name).OrderBy(x=>x.Id).ToListAsync();
+        }
 
         public async Task<Product?> GetProductAsync(int productId)
         {

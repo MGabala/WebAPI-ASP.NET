@@ -3,6 +3,7 @@
     public interface IProductRepo
     {
         Task<IEnumerable<Product>> GetAllProductsAsync();
+        Task<IEnumerable<Product>> GetAllProductsAsync(string? name);
         Task<Product?> GetProductAsync(int productId);
         Task<bool> ProductExistAsync(int productId);
         Task<bool> SaveChangesAsync();

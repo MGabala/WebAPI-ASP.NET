@@ -23,9 +23,9 @@ public class ProductController : ControllerBase
 
     //Pobierz całą listę
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+    public async Task<ActionResult<IEnumerable<Product>>> GetProducts([FromQuery] string? name)
     {
-        var productEntities = await _productRepo.GetAllProductsAsync();
+        var productEntities = await _productRepo.GetAllProductsAsync(name);
         return Ok(_mapper.Map<IEnumerable<Product>>(productEntities));
 
     }
