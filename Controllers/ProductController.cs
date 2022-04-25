@@ -8,6 +8,7 @@ public class ProductController : ControllerBase
     private readonly IMapper _mapper;
     private readonly ILogger<ProductController> _logger;
     private readonly IMailService _mailService;
+    const int maxSize = 25;
 
     //-------------------------------------------------------------------------------------//
     public ProductController(IProductRepo productRepo, IMapper mapper,
@@ -22,11 +23,16 @@ public class ProductController : ControllerBase
     //-------------------------------------------------------------------------------------//
 
     //Pobierz całą listę
-    //Use search and filter: ?name=<> / ?searchQuery=<>
+    //example of search and filter: ?name=<> / ?searchQuery=<>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProducts([FromQuery] string? name, string? searchQuery)
+    public async Task<ActionResult<IEnumerable<Product>>> GetProducts(
+        [FromQuery] string? name, string? searchQuery, int pageNumber = 1, int pageSize = 5 )
     {
-        var productEntities = await _productRepo.GetAllProductsAsync(name, searchQuery);
+        if(pageSize > maxSize)
+        {
+            pageSize = maxSize;
+        }
+        var productEntities = await _productRepo.GetAllProductsAsync(name, searchQuery, pageNumber, pageSize);
         return Ok(_mapper.Map<IEnumerable<Product>>(productEntities));
 
     }
