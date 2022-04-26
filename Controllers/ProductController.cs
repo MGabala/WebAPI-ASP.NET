@@ -22,7 +22,7 @@ public class ProductController : ControllerBase
     //-------------------------------------------------------------------------------------//
 
     //Pobierz całą listę
-    //example of search and filter: ?name=<> / ?searchQuery=<>
+    //example of search and filter: ?name=<> / ?searchQuery=<> / ?pageNumber=<> 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Product>>> GetProducts(
         [FromQuery] string? name, string? searchQuery, int pageNumber = 1, int pageSize = 5 )
