@@ -26,13 +26,8 @@
         {
            return await _context.Products.OrderBy(x=>x.Id).ToListAsync();
         }
-        public async Task<IEnumerable<Product>> GetAllProductsAsync(string? name, string? searchQuery)
+        public async Task<IEnumerable<Product>> GetAllProductsAsync(string? name, string? searchQuery, int pageNumber, int pageSize)
         {
-           if(string.IsNullOrEmpty(name)
-                && string.IsNullOrEmpty(searchQuery))
-            {
-                return await GetAllProductsAsync();
-            }
            var collection = _context.Products as IQueryable<Product>;
             if (!string.IsNullOrEmpty(name))
             {
@@ -45,7 +40,10 @@
                 collection = collection.Where(x => x.Name.Contains(searchQuery)
                 || (x.Desc != null && x.Desc.Contains(searchQuery)));
             }
-            return await collection.OrderBy(x=>x.Name).ToListAsync();
+            return await collection.OrderBy(x=>x.Name)
+                .Skip(pageSize*(pageNumber-1))
+                .Take(pageSize)
+                .ToListAsync();
         }
 
         public async Task<Product?> GetProductAsync(int productId)
