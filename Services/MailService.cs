@@ -16,5 +16,3 @@ public class MailService : IMailService
         Console.WriteLine($"Message: {message}");
     }
 }
-
-//

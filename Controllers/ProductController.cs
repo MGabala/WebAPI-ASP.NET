@@ -1,5 +1,4 @@
 ﻿
-
 namespace WebAPI.Controllers;
 [ApiController, Route("api/products")]
 public class ProductController : ControllerBase
@@ -32,7 +31,11 @@ public class ProductController : ControllerBase
         {
             pageSize = maxSize;
         }
-        var productEntities = await _productRepo.GetAllProductsAsync(name, searchQuery, pageNumber, pageSize);
+        var (productEntities, paginationMetadata) = await _productRepo.GetAllProductsAsync(
+            name, searchQuery, pageNumber, pageSize);
+
+        Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
+
         return Ok(_mapper.Map<IEnumerable<Product>>(productEntities));
 
     }
@@ -132,5 +135,3 @@ public class ProductController : ControllerBase
         return NoContent();
     }
 }
-//
-

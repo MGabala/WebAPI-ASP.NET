@@ -26,7 +26,7 @@
         {
            return await _context.Products.OrderBy(x=>x.Id).ToListAsync();
         }
-        public async Task<IEnumerable<Product>> GetAllProductsAsync(string? name, string? searchQuery, int pageNumber, int pageSize)
+        public async Task<(IEnumerable<Product>,PaginationMetadata)> GetAllProductsAsync(string? name, string? searchQuery, int pageNumber, int pageSize)
         {
            var collection = _context.Products as IQueryable<Product>;
             if (!string.IsNullOrEmpty(name))
@@ -40,10 +40,14 @@
                 collection = collection.Where(x => x.Name.Contains(searchQuery)
                 || (x.Desc != null && x.Desc.Contains(searchQuery)));
             }
-            return await collection.OrderBy(x=>x.Name)
-                .Skip(pageSize*(pageNumber-1))
+            var totalCount = await collection.CountAsync();
+            var paginationMetadata = new PaginationMetadata(totalCount,pageSize,pageNumber);
+
+           var collectionToReturn = await collection.OrderBy(x => x.Name)
+                .Skip(pageSize * (pageNumber - 1))
                 .Take(pageSize)
                 .ToListAsync();
+            return (collectionToReturn,paginationMetadata);
         }
 
         public async Task<Product?> GetProductAsync(int productId)

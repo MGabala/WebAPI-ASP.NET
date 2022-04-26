@@ -8,3 +8,4 @@ global using WebAPI_ASP.NET6.Db;
 global using WebAPI_ASP.NET6.Entities;
 global using AutoMapper;
 global using Microsoft.AspNetCore.JsonPatch;
+global using System.Text.Json;
