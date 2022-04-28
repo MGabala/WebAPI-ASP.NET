@@ -2,7 +2,7 @@
 
 
 namespace WebAPI.Controllers;
-[ApiController,Authorize, Route("api/products")]
+[ApiController,Authorize(Policy = "TestPolicy"), Route("api/products")]
 public class ProductController : ControllerBase
 {
     private readonly IProductRepo _productRepo;

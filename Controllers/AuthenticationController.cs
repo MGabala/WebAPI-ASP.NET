@@ -21,6 +21,7 @@ namespace WebAPI_ASP.NET6.Controllers
             public string MailAddress { get; set; }
             public string FirstName { get; set; }
             public string LastName { get; set; }
+            public string Position { get; set; }
 
             public ProductInfoUser(int userId, string mailAddress, string firstName, string lastName)
             {
@@ -28,6 +29,7 @@ namespace WebAPI_ASP.NET6.Controllers
                 MailAddress = mailAddress;
                 FirstName = firstName;
                 LastName = lastName;
+               
             }
         }
 
@@ -56,6 +58,7 @@ namespace WebAPI_ASP.NET6.Controllers
             claimsForToken.Add(new Claim("mail", user.MailAddress));
             claimsForToken.Add(new Claim("given_name", user.FirstName));
             claimsForToken.Add(new Claim("family_name", user.LastName));
+          
 
             var securityToken = new JwtSecurityToken(
                 _configuration["Authentication:Issuer"],

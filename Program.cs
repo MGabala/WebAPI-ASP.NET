@@ -35,7 +35,14 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer(options =>
             Encoding.ASCII.GetBytes(builder.Configuration["Authentication:SecretForKey"]))
     };
 });
-
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("TestPolicy", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("mail", "developer@example.com");
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
