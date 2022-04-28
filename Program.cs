@@ -47,6 +47,12 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("mail", "developer@example.com");
     });
 });
+builder.Services.AddApiVersioning(versionConfiguration =>
+{
+    versionConfiguration.AssumeDefaultVersionWhenUnspecified = true;
+    versionConfiguration.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+    versionConfiguration.ReportApiVersions = true;
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

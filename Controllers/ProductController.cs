@@ -2,7 +2,8 @@
 //CRUD with Authorization Policy with search & filter & pagination metadata. |
 //----------------------------------------------------------------------------
 namespace WebAPI.Controllers;
-[ApiController,Authorize(Policy = "TestPolicy"), Route("api/products")]
+[ApiController, Route("api/products"), ApiVersion("1.0")]
+//[Authorize(Policy = "TestPolicy")]
 public class ProductController : ControllerBase
 {
     private readonly IProductRepo _productRepo;
