@@ -1,6 +1,6 @@
-//----------------------------------------------------------------------------
-//CRUD with Authorization Policy with search & filter & pagination metadata. |
-//----------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------
+//CRUD with Authorization by Policy with search & filter & pagination metadata. Documentation completed for sample methods.|
+//--------------------------------------------------------------------------------------------------------------------------
 
 ///Logger
 Log.Logger = new LoggerConfiguration()
@@ -15,7 +15,31 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(setup =>
+{
+    var xmlCommentsFile = $"comments.xml";
+    var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory,xmlCommentsFile); 
+    setup.IncludeXmlComments(xmlCommentsFullPath);
+
+    setup.AddSecurityDefinition("ProductAPI-BearerAuth", new OpenApiSecurityScheme()
+    {
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        Description = "Input a valid token to access this API."
+    });
+
+    setup.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "ProductAPI-BearerAuth" }
+            }, new List<string>() }
+    });
+});
 #if DEBUG
 builder.Services.AddTransient<IMailService,MailService>();
 #else

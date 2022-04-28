@@ -1,14 +1,15 @@
-﻿//----------------------------------------------------------------------------
-//CRUD with Authorization Policy with search & filter & pagination metadata. |
-//----------------------------------------------------------------------------
+﻿//--------------------------------------------------------------------------------------------------------------------------
+//CRUD with Authorization by Policy with search & filter & pagination metadata. Documentation completed for sample methods.|
+//--------------------------------------------------------------------------------------------------------------------------
 namespace WebAPI_ASP.NET6.Controllers
 {
     [Route("api/authentication")]
     [ApiController]
+    
     public class AuthenticationController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-
+      
         public class AuthenticationBody
         {
             public string? UserName { get; set; }
@@ -36,6 +37,10 @@ namespace WebAPI_ASP.NET6.Controllers
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
+        /// <summary>
+        /// Metoda weryfikacji użytkownika.
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("authenticate")]
         public ActionResult<string> Authenticate(AuthenticationBody authenticationBody)
         {

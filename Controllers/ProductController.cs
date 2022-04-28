@@ -1,9 +1,9 @@
-﻿//----------------------------------------------------------------------------
-//CRUD with Authorization Policy with search & filter & pagination metadata. |
-//----------------------------------------------------------------------------
+﻿//--------------------------------------------------------------------------------------------------------------------------
+//CRUD with Authorization by Policy with search & filter & pagination metadata. Documentation completed for sample methods.|
+//--------------------------------------------------------------------------------------------------------------------------
 namespace WebAPI.Controllers;
-[ApiController, Route("api/products"), ApiVersion("1.0")]
-//[Authorize(Policy = "TestPolicy")]
+[ApiController, Route("api/products"), ApiVersion("1.0"), Authorize(Policy = "TestPolicy")]
+
 public class ProductController : ControllerBase
 {
     private readonly IProductRepo _productRepo;
@@ -23,9 +23,14 @@ public class ProductController : ControllerBase
     }
 
     //-------------------------------------------------------------------------------------//
-
-    //Pobierz całą listę
-    //example of search and filter: ?name=<> / ?searchQuery=<> / ?pageNumber=<> 
+  /// <summary>
+  /// Metoda pobiera listę produktów, pozwala szukać po określonej nazwie lub frazie. Pozwala ustawić limit danych i przeglądać konkretne strony.
+  /// </summary>
+  /// <param name="name">Znajdz produkt o określonej nazwie</param>
+  /// <param name="searchQuery">Szukaj produkty zawierające dany ciąg</param>
+  /// <param name="pageNumber">Określ którą stronę chcesz wylistować</param>
+  /// <param name="pageSize">Określa ilość produktów na stronie</param>
+  /// <returns></returns>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Product>>> GetProducts(
         [FromQuery] string? name, string? searchQuery, int pageNumber = 1, int pageSize = 5 )
@@ -44,8 +49,11 @@ public class ProductController : ControllerBase
     }
 
     //-------------------------------------------------------------------------------------//
-
-    //Pobierz produkt o konkretnym ID
+    /// <summary>
+    /// Metoda pobiera pojedyńczy produkt o konkretnym ID.
+    /// </summary>
+    /// <param name="id">Id produktu</param>
+    /// <returns></returns>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetProduct(int id)
     {
@@ -66,6 +74,10 @@ public class ProductController : ControllerBase
     }
 
     //-------------------------------------------------------------------------------------//
+    /// <summary>
+    /// Metoda dodaje produkt do bazy danych.
+    /// </summary>
+    /// <returns></returns>
     //Dodaj nowy produkt
     [HttpPost]
     public async Task<ActionResult<Product>> CreateNewProduct(Product id)
@@ -76,6 +88,10 @@ public class ProductController : ControllerBase
     }
 
     //-------------------------------------------------------------------------------------//
+    /// <summary>
+    /// Metoda pozwala zaktualizować produkt za pomocą JSON patch.
+    /// </summary>
+    /// <returns></returns>
     //Aktualizacja typu produktu
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateTypeOfProduct(int id, Product product)
@@ -97,7 +113,11 @@ public class ProductController : ControllerBase
     }
 
     //-------------------------------------------------------------------------------------//
-
+    /// <summary>
+    /// Usuwa produkt z bazy danych
+    /// </summary>
+    /// <param name="id"> Id produktu do usunięcia</param>
+    /// <returns></returns>
     //Usuwa produkt
     [HttpDelete("{id}")]
     public async Task<ActionResult<Product>> DeleteProduct(int id)
@@ -109,7 +129,10 @@ public class ProductController : ControllerBase
 
 
     //-------------------------------------------------------------------------------------//
-
+    /// <summary>
+    /// Metoda pozwala zaktualizować konkretny atrybut produktu.
+    /// </summary>
+    /// <returns></returns>
     //Update wartości
     [HttpPatch("{id}")]
     public async Task<ActionResult<Product>> UpdateProduct(int id, JsonPatchDocument<Product> patch)
