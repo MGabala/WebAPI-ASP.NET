@@ -1,6 +1,8 @@
 ﻿
+
+
 namespace WebAPI.Controllers;
-[ApiController, Route("api/products")]
+[ApiController,Authorize, Route("api/products")]
 public class ProductController : ControllerBase
 {
     private readonly IProductRepo _productRepo;

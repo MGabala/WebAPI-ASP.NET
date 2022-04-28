@@ -1,4 +1,4 @@
-﻿//https://localhost:7033/api/authentication/authenticate
+﻿//HTTPPOST: https://localhost:7033/api/authentication/authenticate
 // Body:raw + JSON -> { "user" : "Mateusz", "password": "SecretPassword" } 
 
 
