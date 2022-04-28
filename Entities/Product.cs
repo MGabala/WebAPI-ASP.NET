@@ -1,6 +1,8 @@
-﻿namespace WebAPI_ASP.NET6.Entities;
-
-    public class Product
+﻿//----------------------------------------------------------------------------
+//CRUD with Authorization Policy with search & filter & pagination metadata. |
+//----------------------------------------------------------------------------
+namespace WebAPI_ASP.NET6.Entities;
+  public class Product
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

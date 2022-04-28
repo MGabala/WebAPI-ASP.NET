@@ -1,3 +1,7 @@
+//----------------------------------------------------------------------------
+//CRUD with Authorization Policy with search & filter & pagination metadata. |
+//----------------------------------------------------------------------------
+
 ///Logger
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()

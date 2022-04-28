@@ -1,4 +1,7 @@
-﻿namespace WebAPI_ASP.NET6.Models;
+﻿//----------------------------------------------------------------------------
+//CRUD with Authorization Policy with search & filter & pagination metadata. |
+//----------------------------------------------------------------------------
+namespace WebAPI_ASP.NET6.Models;
 public class Product
     {
         public int ProductId { get; set; }

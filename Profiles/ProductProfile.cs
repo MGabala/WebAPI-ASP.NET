@@ -1,4 +1,7 @@
-﻿namespace WebAPI_ASP.NET6.Profiles
+﻿//----------------------------------------------------------------------------
+//CRUD with Authorization Policy with search & filter & pagination metadata. |
+//----------------------------------------------------------------------------
+namespace WebAPI_ASP.NET6.Profiles
 {
     public class ProductProfile : Profile
     {

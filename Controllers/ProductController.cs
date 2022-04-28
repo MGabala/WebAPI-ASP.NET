@@ -1,6 +1,6 @@
-﻿
-
-
+﻿//----------------------------------------------------------------------------
+//CRUD with Authorization Policy with search & filter & pagination metadata. |
+//----------------------------------------------------------------------------
 namespace WebAPI.Controllers;
 [ApiController,Authorize(Policy = "TestPolicy"), Route("api/products")]
 public class ProductController : ControllerBase

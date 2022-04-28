@@ -1,5 +1,6 @@
-﻿
-
+﻿//----------------------------------------------------------------------------
+//CRUD with Authorization Policy with search & filter & pagination metadata. |
+//----------------------------------------------------------------------------
 namespace WebAPI_ASP.NET6.Db;
 
 public class ProductDb : DbContext

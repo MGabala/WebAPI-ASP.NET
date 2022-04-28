@@ -1,7 +1,6 @@
-﻿//HTTPPOST: https://localhost:7033/api/authentication/authenticate
-// Body:raw + JSON -> { "user" : "Mateusz", "password": "SecretPassword" } 
-
-
+﻿//----------------------------------------------------------------------------
+//CRUD with Authorization Policy with search & filter & pagination metadata. |
+//----------------------------------------------------------------------------
 namespace WebAPI_ASP.NET6.Controllers
 {
     [Route("api/authentication")]
