@@ -1,0 +1,1110 @@
+{
+	"info": {
+		"_postman_id": "685dcf63-82d7-429b-8519-4982af6e67e3",
+		"name": "WebAPI-ASP.NET6",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "products",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Metoda pobiera pojedyńczy produkt o konkretnym ID.",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"response time must be below 300ms\", function () { pm.expect(pm.response.responseTime).to.be.below(300); });\r",
+													"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });\r",
+													"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/products/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"products",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "3",
+													"description": "(Required) Id produktu"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/products/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"products",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "48930962",
+															"description": "(Required) Id produktu"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "Metoda pozwala zaktualizować produkt za pomocą JSON patch.",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"ad\",\n  \"id\": 0,\n  \"desc\": \"over\",\n  \"quantity\": 67294023,\n  \"price\": 156,\n  \"test\": true\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/products/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"products",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "4",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"name\": \"ad\",\n  \"id\": -21925370,\n  \"desc\": \"commodo ad\",\n  \"quantity\": 67294023,\n  \"price\": -15288570.793208271,\n  \"test\": true\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/products/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"products",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "48930962",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "Usuwa produkt z bazy danych",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"response time must be below 300ms\", function () { pm.expect(pm.response.responseTime).to.be.below(300); });\r",
+													"pm.test(\"Status code is 204\", function () { pm.response.to.have.status(204); });"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/products/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"products",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "13",
+													"description": "(Required) Id produktu do usunięcia"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/products/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"products",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "48930962",
+															"description": "(Required) Id produktu do usunięcia"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"name\": \"ad\",\n  \"id\": -21925370,\n  \"desc\": \"commodo ad\",\n  \"quantity\": 67294023,\n  \"price\": -15288570.793208271,\n  \"test\": true\n}"
+										}
+									]
+								},
+								{
+									"name": "Metoda pozwala zaktualizować konkretny atrybut produktu.",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"response time must be below 300ms\", function () { pm.expect(pm.response.responseTime).to.be.below(300); });\r",
+													"pm.test(\"Status code is 204\", function () { pm.response.to.have.status(204); });\r",
+													"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });\r",
+													"pm.test(\"Status code is 400\", function () { pm.response.to.have.status(400); });"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n{ \"op\": \"replace\", \"path\": \"/desc\", \"value\": \"Chocolate Digestive\" }\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/products/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"products",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "3",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "[\n  {\n    \"operationType\": 0,\n    \"path\": \"reprehenderit sint\",\n    \"op\": \"culpa in est\",\n    \"from\": \"in adipisicing qui\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 0,\n    \"path\": \"Lorem nulla\",\n    \"op\": \"cupidatat\",\n    \"from\": \"consequat\",\n    \"value\": {}\n  }\n]",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/products/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"products",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "48930962",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"name\": \"ad\",\n  \"id\": -21925370,\n  \"desc\": \"commodo ad\",\n  \"quantity\": 67294023,\n  \"price\": -15288570.793208271,\n  \"test\": true\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Metoda pobiera listę produktów, pozwala szukać po określonej nazwie lub frazie. Pozwala ustawić limit danych i przeglądać konkretne strony.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"response time must be below 300ms\", function () { pm.expect(pm.response.responseTime).to.be.below(300); });\r",
+											"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/products?searchQuery=Smartphone&pageNumber=1&pageSize=5",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "",
+											"description": "Znajdz produkt o określonej nazwie",
+											"disabled": true
+										},
+										{
+											"key": "searchQuery",
+											"value": "Smartphone",
+											"description": "Szukaj produkty zawierające dany ciąg"
+										},
+										{
+											"key": "pageNumber",
+											"value": "1",
+											"description": "Określ którą stronę chcesz wylistować"
+										},
+										{
+											"key": "pageSize",
+											"value": "5",
+											"description": "Określa ilość produktów na stronie"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/products?name=officia&searchQuery=officia&pageNumber=1&pageSize=5",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"products"
+											],
+											"query": [
+												{
+													"key": "name",
+													"value": "officia"
+												},
+												{
+													"key": "searchQuery",
+													"value": "officia"
+												},
+												{
+													"key": "pageNumber",
+													"value": "1"
+												},
+												{
+													"key": "pageSize",
+													"value": "5"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"name\": \"non dolore ea ullamco\",\n    \"id\": 66466074,\n    \"desc\": \"adipisicing\",\n    \"quantity\": -36526444,\n    \"price\": -6922067.821794137,\n    \"test\": true\n  },\n  {\n    \"name\": \"dolore sed\",\n    \"id\": -33876829,\n    \"desc\": \"in consequat Duis elit\",\n    \"quantity\": -98748089,\n    \"price\": 117456.48200571537,\n    \"test\": false\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "Metoda dodaje produkt do bazy danych.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"response time must be below 300ms\", function () { pm.expect(pm.response.responseTime).to.be.below(300); });\r",
+											"pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 0,\n  \"name\": \"string\",\n  \"desc\": \"string\",\n  \"quantity\": 0,\n  \"price\": 0,\n  \"test\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"ad\",\n  \"id\": -21925370,\n  \"desc\": \"commodo ad\",\n  \"quantity\": 67294023,\n  \"price\": -15288570.793208271,\n  \"test\": true\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/products",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"products"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"name\": \"ad\",\n  \"id\": -21925370,\n  \"desc\": \"commodo ad\",\n  \"quantity\": 67294023,\n  \"price\": -15288570.793208271,\n  \"test\": true\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Test",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/Test/:id",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Test/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Test",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "3",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Test/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Test",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "48930962",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"officia\""
+										}
+									]
+								},
+								{
+									"name": "/api/Test/:id",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "\"officia\"",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Test/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Test",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "48930962",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "\"officia\"",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Test/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Test",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "48930962",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "/api/Test/:id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Test/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Test",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "48930962",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Test/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Test",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "48930962",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/Test",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {\r",
+											"    console.log(response.json());\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Test",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Test"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Test",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Test"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  \"culpa\",\n  \"id ut voluptate\"\n]"
+								}
+							]
+						},
+						{
+							"name": "/api/Test",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\"officia\"",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Test",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Test"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "\"officia\"",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Test",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Test"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Metoda weryfikacji użytkownika.",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userName\": \"pariatur sed consectetur\",\n  \"password\": \"aliquip mollit\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/authentication/authenticate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"authentication",
+								"authenticate"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"userName\": \"pariatur sed consectetur\",\n  \"password\": \"aliquip mollit\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/authentication/authenticate",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"authentication",
+										"authenticate"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"officia\""
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "<Bearer Token>",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	]
+}
