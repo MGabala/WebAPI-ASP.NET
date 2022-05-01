@@ -29,8 +29,4 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.17.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ProgramClient\ProgramClient.csproj" />
-  </ItemGroup>
-
 </Project>
