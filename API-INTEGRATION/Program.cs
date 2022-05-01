@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace APIIntegartion // Note: actual namespace depends on the project name.
+namespace APIIntegartion
 {
-    internal class Program
+    internal class APIIntegration
     {
         static void Main(string[] args)
         {
