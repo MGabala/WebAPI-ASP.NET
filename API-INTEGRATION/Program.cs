@@ -2,11 +2,12 @@
 
 namespace APIIntegartion
 {
-    internal class APIIntegration
+    internal class APIIntegration : CRUDService
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var instance = new CRUDService();
+            await instance.Run();
         }
     }
 }

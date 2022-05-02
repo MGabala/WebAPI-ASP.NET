@@ -2,7 +2,8 @@
 //CRUD with Authorization by Policy with search & filter & pagination metadata. Documentation completed for sample methods.|
 //--------------------------------------------------------------------------------------------------------------------------
 namespace WebAPI.Controllers;
-[ApiController, Route("api/products"), ApiVersion("1.0"), Authorize(Policy = "TestPolicy")]
+[ApiController, Route("api/products"), ApiVersion("1.0")]
+//[Authorize(Policy = "TestPolicy")]
 
 public class ProductController : ControllerBase
 {
