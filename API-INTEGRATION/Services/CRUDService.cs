@@ -1,4 +1,7 @@
-﻿namespace APIIntegartion
+﻿using Integration;
+using System.Text.Json;
+
+namespace APIIntegartion
 {
     public class CRUDService 
     {
@@ -19,6 +22,8 @@
         {
             var response = await _httpClient.GetAsync("/api/products");
             response.EnsureSuccessStatusCode();
+            var content = await response.Content.ReadAsStringAsync();
+            var products = JsonSerializer.Deserialize<IEnumerable<IntegrationProduct>>(content);
         }
     }
 }
