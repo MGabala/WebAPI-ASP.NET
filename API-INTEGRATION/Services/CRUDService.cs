@@ -16,7 +16,8 @@
         {
             //await GetResource();
             //await CreateResource();
-            await FullUpdateResource();
+            //await FullUpdateResource();
+            await DeleteResource();
         }
 
         public async Task GetResource()
@@ -69,6 +70,10 @@
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
 
+        }
+        public async Task DeleteResource()
+        {
+            var request = await _httpClient.DeleteAsync("/api/products/3");
         }
     }
 }
