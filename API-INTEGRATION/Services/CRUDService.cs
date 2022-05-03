@@ -19,9 +19,6 @@ namespace APIIntegartion
             //await RemoveResource();
             //await UpdateResource();
             await GetResource();
-
-            
-
         }
 
         public async Task GetResource()
