@@ -15,7 +15,8 @@ namespace APIIntegartion
 
         public async Task Run()
         {
-            await GetResource();
+            //await GetResource();
+            await PostResource();
         }
 
         public async Task GetResource()
@@ -28,6 +29,17 @@ namespace APIIntegartion
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
+        }
+        public async Task PostResource()
+        {
+            var _object = new
+            {
+                Id = 0,
+                Name = "Test from integration",
+               
+            };
+            JsonContent content = JsonContent.Create(_object);
+            var response = await _httpClient.PostAsync("/api/products", content);
         }
     }
 }
