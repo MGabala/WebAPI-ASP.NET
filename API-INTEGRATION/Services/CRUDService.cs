@@ -1,4 +1,5 @@
-﻿namespace APIIntegartion
+﻿
+namespace APIIntegartion
 {
     public class CRUDService
     {
@@ -14,9 +15,9 @@
 
         public async Task Run()
         {
-            //await GetResource();
-            //await CreateResource();
-            //await FullUpdateResource();
+            await GetResource();
+            await CreateResource();
+            await FullUpdateResource();
             await DeleteResource();
         }
 
@@ -35,6 +36,7 @@
         {
             var product = new
             {
+                
                 Name = "Test from Integration v2",
                 Desc = "Sample desc from Integration",
                 Quantity = 16,
@@ -49,27 +51,22 @@
         {
             var productToUpdate = new
             {
+                Id = 3,
                 Name = "Full Update - Test from integration",
                 Desc = "Full Update - Sample desc from Integration",
                 Quantity = 16,
                 Price = 65,
                 Test = true
             };
-            var serialize = JsonSerializer.Serialize(productToUpdate);
-
-            var request = new HttpRequestMessage(HttpMethod.Put, "api/products/3");
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            request.Content = new StringContent(serialize);
-            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var response = _httpClient.SendAsync(request).Result;
+            var response = await _httpClient.PostAsync(
+                "/api/products", new StringContent(JsonSerializer.Serialize(productToUpdate),
+                          Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
-            var update = JsonSerializer.Deserialize<IntegrationProduct>(content,
-                new JsonSerializerOptions
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                });
-
+            var create = JsonSerializer.Deserialize<IntegrationProduct>(content, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
         }
         public async Task DeleteResource()
         {
