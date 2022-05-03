@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace APIIntegartion
+﻿namespace APIIntegartion
 {
     internal class APIIntegration : CRUDService
     {
