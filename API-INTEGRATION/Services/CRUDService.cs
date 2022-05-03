@@ -32,13 +32,16 @@ namespace APIIntegartion
         }
         public async Task PostResource()
         {
-            var _object = new
+            var product = new
             {
-                Id = 0,
-                Name = "Test from integration",
-               
+                Name = "Test from Integration v2",
+                Desc = "Sample desc from Integration",
+                Quantity = 16,
+                Price = 65,
+                Test = true
+
             };
-            JsonContent content = JsonContent.Create(_object);
+            JsonContent content = JsonContent.Create(product);
             var response = await _httpClient.PostAsync("/api/products", content);
         }
     }
