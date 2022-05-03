@@ -1,5 +1,4 @@
-﻿
-namespace APIIntegartion
+﻿namespace APIIntegartion
 {
     public class CRUDService
     {
@@ -16,7 +15,8 @@ namespace APIIntegartion
         public async Task Run()
         {
             //await GetResource();
-            await PostResource();
+            //await CreateResource();
+            await FullUpdateResource();
         }
 
         public async Task GetResource()
@@ -30,7 +30,7 @@ namespace APIIntegartion
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
         }
-        public async Task PostResource()
+        public async Task CreateResource()
         {
             var product = new
             {
@@ -43,6 +43,32 @@ namespace APIIntegartion
             };
             JsonContent content = JsonContent.Create(product);
             var response = await _httpClient.PostAsync("/api/products", content);
+        }
+        public async Task FullUpdateResource()
+        {
+            var productToUpdate = new
+            {
+                Name = "Full Update - Test from integration",
+                Desc = "Full Update - Sample desc from Integration",
+                Quantity = 16,
+                Price = 65,
+                Test = true
+            };
+            var serialize = JsonSerializer.Serialize(productToUpdate);
+
+            var request = new HttpRequestMessage(HttpMethod.Put, "api/products/3");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Content = new StringContent(serialize);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = _httpClient.SendAsync(request).Result;
+            response.EnsureSuccessStatusCode();
+            var content = await response.Content.ReadAsStringAsync();
+            var update = JsonSerializer.Deserialize<IntegrationProduct>(content,
+                new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+
         }
     }
 }
