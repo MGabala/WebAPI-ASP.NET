@@ -15,10 +15,13 @@ namespace APIIntegartion
 
         public async Task Run()
         {
-            await GetResource();
-            await CreateResource();
-            await FullUpdateResource();
-            await DeleteResource();
+            //await CreateResource();
+            //await RemoveResource();
+            //await UpdateResource();
+            //await GetResource();
+
+            
+
         }
 
         public async Task GetResource()
