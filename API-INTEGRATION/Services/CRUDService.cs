@@ -18,7 +18,7 @@ namespace APIIntegartion
             //await CreateResource();
             //await RemoveResource();
             //await UpdateResource();
-            //await GetResource();
+            await GetResource();
 
             
 
