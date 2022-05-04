@@ -19,7 +19,7 @@ namespace APIIntegartion
             //await RemoveResource();
             //await UpdateResource();
             //await GetResourceVIAShortcut();
-            await PartialUpdateVIAHttpRequestMessage();
+            await PartialUpdateVIAShortcut();
         }
         public async Task GetResourceVIAHttpRequestMessage()
         {
@@ -103,7 +103,12 @@ namespace APIIntegartion
         }
         public async Task PartialUpdateVIAShortcut()
         {
-
+            var patch = new JsonPatchDocument<IntegrationProduct>();
+            patch.Replace(x => x.Desc, "Updated from Shortcut");
+            var response = await _httpClient.PatchAsync("/api/products/4",
+                new StringContent(
+                    JsonConvert.SerializeObject(patch), Encoding.UTF8, "application/json-patch+json"));
+            response.EnsureSuccessStatusCode();
         }
     }
 }
