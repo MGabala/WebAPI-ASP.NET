@@ -43,7 +43,7 @@ public class ProductController : ControllerBase
         var (productEntities, paginationMetadata) = await _productRepo.GetAllProductsAsync(
             name, searchQuery, pageNumber, pageSize);
 
-        Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
+        Response.Headers.Add("X-Pagination", System.Text.Json.JsonSerializer.Serialize(paginationMetadata));
 
         return Ok(_mapper.Map<IEnumerable<Product>>(productEntities));
 

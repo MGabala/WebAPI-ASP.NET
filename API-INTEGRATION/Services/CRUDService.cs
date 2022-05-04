@@ -18,7 +18,8 @@ namespace APIIntegartion
             //await CreateResource();
             //await RemoveResource();
             //await UpdateResource();
-            await GetResource();
+            //await GetResource();
+            await PartialUpdate();
         }
 
         public async Task GetResource()
@@ -26,7 +27,7 @@ namespace APIIntegartion
             var response = await _httpClient.GetAsync("/api/products");
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
-            var products = JsonSerializer.Deserialize<IEnumerable<IntegrationProduct>>(
+            var products = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<IntegrationProduct>>(
                 content, new JsonSerializerOptions()
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
@@ -36,7 +37,7 @@ namespace APIIntegartion
         {
             var product = new
             {
-                
+
                 Name = "Test from Integration v2",
                 Desc = "Sample desc from Integration",
                 Quantity = 16,
@@ -59,11 +60,11 @@ namespace APIIntegartion
                 Test = true
             };
             var response = await _httpClient.PostAsync(
-                "/api/products", new StringContent(JsonSerializer.Serialize(productToUpdate),
+                "/api/products", new StringContent(System.Text.Json.JsonSerializer.Serialize(productToUpdate),
                           Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
-            var create = JsonSerializer.Deserialize<IntegrationProduct>(content, new JsonSerializerOptions
+            var create = System.Text.Json.JsonSerializer.Deserialize<IntegrationProduct>(content, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
@@ -71,6 +72,19 @@ namespace APIIntegartion
         public async Task DeleteResource()
         {
             var request = await _httpClient.DeleteAsync("/api/products/3");
+        }
+        public async Task PartialUpdate()
+        {
+            var patch = new JsonPatchDocument<IntegrationProduct>();
+            patch.Replace(x => x.Name, "Partial Update from Integraiton");
+            patch.Remove(x => x.Desc);
+            var serialize = JsonConvert.SerializeObject(patch);
+            var request = new HttpRequestMessage(HttpMethod.Patch, "api/products/4");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Content = new StringContent(serialize);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json-patch+json");
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
         }
     }
 }
