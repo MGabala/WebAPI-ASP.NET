@@ -68,6 +68,10 @@
 
         public async Task TESTGetProductWithStreamPerformanceTest()
         {
+            //Ready.. Steady..
+            await GetProductWithStreamPerformanceTest();
+            
+            //Go...!!!!
             var stopWatch = Stopwatch.StartNew();
             for (int i = 0; i < 1000; i++)
             {
