@@ -1,4 +1,7 @@
-﻿namespace APIIntegartion
+﻿//-----------------------------------------------------------------------------------------------
+// WEB.API INTEGRATION support CRUD actions with two scenarios. Shortcuts and HttpRequestMessage|
+//-----------------------------------------------------------------------------------------------
+namespace APIIntegartion
 {
     internal class APIIntegration : CRUDService
     {

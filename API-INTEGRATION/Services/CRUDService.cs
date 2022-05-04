@@ -1,4 +1,6 @@
-﻿
+﻿//-----------------------------------------------------------------------------------------------
+// WEB.API INTEGRATION support CRUD actions with two scenarios. Shortcuts and HttpRequestMessage|
+//-----------------------------------------------------------------------------------------------
 namespace APIIntegartion
 {
     public class CRUDService
@@ -14,16 +16,29 @@ namespace APIIntegartion
         }
 
         public async Task Run()
-        {
-            //await CreateResourceVIAShortcut();
-            //await RemoveResource();
-            //await UpdateResource();
-            //await GetResourceVIAShortcut();
-            await PartialUpdateVIAShortcut();
+        {  
+            await GetResourceVIAHttpRequestMessage();
+           //GetResourceVIAShortcut();
+           //CreateResourceVIAHttpRequestMessage();
+           //CreateResourceVIAShortcut();
+           //await FullUpdateResourceVIAHttpRequestMessage();
+           //FullUpdateResourceVIAShortcut();
+           //await DeleteResourceVIAHttpRequestMessage();
+           //DeleteResourceVIAShortcut();
+           //PartialUpdateVIAHttpRequestMessage();
+           //await PartialUpdateVIAShortcut();
         }
         public async Task GetResourceVIAHttpRequestMessage()
         {
-
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/products");
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            var content = await response.Content.ReadAsStringAsync();
+            var products = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<IntegrationProduct>>(content,
+                new JsonSerializerOptions()
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
         }
         public async Task GetResourceVIAShortcut()
         {
@@ -38,7 +53,21 @@ namespace APIIntegartion
         }
         public async Task CreateResourceVIAHttpRequestMessage()
         {
-
+            var product = new
+            {
+                Name = "Test from created resources",
+                Desc = "via httprequestmessage",
+                Quantity = 16,
+                Price = 65,
+                Test = true
+            };
+            var serialize = System.Text.Json.JsonSerializer.Serialize(product);
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/products");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Content = new StringContent(serialize);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
         }
         public async Task CreateResourceVIAShortcut()
         {
@@ -57,7 +86,21 @@ namespace APIIntegartion
         }
         public async Task FullUpdateResourceVIAHttpRequestMessage()
         {
-
+            var productToUpdate = new
+            {
+                Name = "Full Update - Test from integration v3",
+                Desc = "Full Update - Sample desc from Integration v3",
+                Quantity = 16,
+                Price = 65,
+                Test = true
+            };
+            var serialize = System.Text.Json.JsonSerializer.Serialize(productToUpdate);
+            var request = new HttpRequestMessage(HttpMethod.Put, "/api/products/3");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Content = new StringContent(serialize);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
         }
         public async Task FullUpdateResourceVIAShortcut()
         {
@@ -74,15 +117,13 @@ namespace APIIntegartion
                 "/api/products", new StringContent(System.Text.Json.JsonSerializer.Serialize(productToUpdate),
                           Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
-            //var content = await response.Content.ReadAsStringAsync();
-            //var create = System.Text.Json.JsonSerializer.Deserialize<IntegrationProduct>(content, new JsonSerializerOptions
-            //{
-            //    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            //});
         }
         public async Task DeleteResourceVIAHttpRequestMessage()
         {
-
+            var request = new HttpRequestMessage(HttpMethod.Delete, "/api/products/5");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var responce = await _httpClient.SendAsync(request);
+            responce.EnsureSuccessStatusCode();
         }
         public async Task DeleteResourceVIAShortcut()
         {
