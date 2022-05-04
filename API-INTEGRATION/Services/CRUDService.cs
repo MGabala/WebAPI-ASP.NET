@@ -15,14 +15,17 @@ namespace APIIntegartion
 
         public async Task Run()
         {
-            //await CreateResource();
+            //await CreateResourceVIAShortcut();
             //await RemoveResource();
             //await UpdateResource();
-            //await GetResource();
-            await PartialUpdate();
+            //await GetResourceVIAShortcut();
+            await PartialUpdateVIAHttpRequestMessage();
         }
+        public async Task GetResourceVIAHttpRequestMessage()
+        {
 
-        public async Task GetResource()
+        }
+        public async Task GetResourceVIAShortcut()
         {
             var response = await _httpClient.GetAsync("/api/products");
             response.EnsureSuccessStatusCode();
@@ -33,7 +36,11 @@ namespace APIIntegartion
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
         }
-        public async Task CreateResource()
+        public async Task CreateResourceVIAHttpRequestMessage()
+        {
+
+        }
+        public async Task CreateResourceVIAShortcut()
         {
             var product = new
             {
@@ -48,7 +55,11 @@ namespace APIIntegartion
             JsonContent content = JsonContent.Create(product);
             var response = await _httpClient.PostAsync("/api/products", content);
         }
-        public async Task FullUpdateResource()
+        public async Task FullUpdateResourceVIAHttpRequestMessage()
+        {
+
+        }
+        public async Task FullUpdateResourceVIAShortcut()
         {
             var productToUpdate = new
             {
@@ -63,17 +74,21 @@ namespace APIIntegartion
                 "/api/products", new StringContent(System.Text.Json.JsonSerializer.Serialize(productToUpdate),
                           Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
-            var content = await response.Content.ReadAsStringAsync();
-            var create = System.Text.Json.JsonSerializer.Deserialize<IntegrationProduct>(content, new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
+            //var content = await response.Content.ReadAsStringAsync();
+            //var create = System.Text.Json.JsonSerializer.Deserialize<IntegrationProduct>(content, new JsonSerializerOptions
+            //{
+            //    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            //});
         }
-        public async Task DeleteResource()
+        public async Task DeleteResourceVIAHttpRequestMessage()
+        {
+
+        }
+        public async Task DeleteResourceVIAShortcut()
         {
             var request = await _httpClient.DeleteAsync("/api/products/3");
         }
-        public async Task PartialUpdate()
+        public async Task PartialUpdateVIAHttpRequestMessage()
         {
             var patch = new JsonPatchDocument<IntegrationProduct>();
             patch.Replace(x => x.Name, "Partial Update from Integraiton");
@@ -85,6 +100,10 @@ namespace APIIntegartion
             request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json-patch+json");
             var response = await _httpClient.SendAsync(request);
             response.EnsureSuccessStatusCode();
+        }
+        public async Task PartialUpdateVIAShortcut()
+        {
+
         }
     }
 }
