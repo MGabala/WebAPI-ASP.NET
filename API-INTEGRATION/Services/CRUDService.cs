@@ -17,7 +17,7 @@ namespace APIIntegartion
 
         public async Task Run()
         {  
-            await GetResourceVIAHttpRequestMessage();
+            //await GetResourceVIAHttpRequestMessage();
            //GetResourceVIAShortcut();
            //CreateResourceVIAHttpRequestMessage();
            //CreateResourceVIAShortcut();

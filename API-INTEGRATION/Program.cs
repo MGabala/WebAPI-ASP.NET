@@ -7,8 +7,10 @@ namespace APIIntegartion
     {
         static async Task Main(string[] args)
         {
-            var instance = new CRUDService();
-            await instance.Run();
+            var CRUDinstance = new CRUDService();
+            await CRUDinstance.Run();
+            var StreamInstance = new StreamService();
+            await StreamInstance.Run();
         }
     }
 }
