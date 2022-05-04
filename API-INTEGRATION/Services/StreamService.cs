@@ -14,10 +14,11 @@
 
         public async Task Run()
         {
-            await GetProductsWithStream();
+            //await GetProductWithStream();
+            await GetProductWithStreamAndCompletionMode();
         }
 
-        public async Task GetProductsWithStream()
+        public async Task GetProductWithStream()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"/api/products/3");
             var response = await _httpClient.SendAsync(request);
@@ -32,6 +33,24 @@
                             var poster = serializer.Deserialize<IntegrationProduct>(jsonReader);
                         }
                     }
+            }
+        }
+        public async Task GetProductWithStreamAndCompletionMode()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, $"/api/products/3");
+            var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+            using (var stream = await response.Content.ReadAsStreamAsync())
+            {
+                response.EnsureSuccessStatusCode();
+                var poster = stream.ReadAndDeserializeFromJson<IntegrationProduct>();
+                //using (var streamReader = new StreamReader(stream))
+                //{
+                //    using (var jsonReader = new JsonTextReader(streamReader))
+                //    {
+                //        var serializer = new Newtonsoft.Json.JsonSerializer();
+                //        var poster = serializer.Deserialize<IntegrationProduct>(jsonReader);
+                //    }
+                //}
             }
         }
     }
