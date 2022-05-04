@@ -79,7 +79,7 @@
                 
             }
             stopWatch.Stop();
-            Console.WriteLine($"Time elapsed with stream: {stopWatch.ElapsedMilliseconds} ");
+            Console.WriteLine($"Time elapsed with stream: {stopWatch.ElapsedMilliseconds}, " + $"averaging {stopWatch.ElapsedMilliseconds/1000} miliseconds/request ");
 
             stopWatch.Reset();
             stopWatch.Start();
@@ -89,7 +89,7 @@
                
             }
             stopWatch.Stop();
-            Console.WriteLine($"Time elapsed via shortcut: {stopWatch.ElapsedMilliseconds}");
+            Console.WriteLine($"Time elapsed via shortcut: {stopWatch.ElapsedMilliseconds}, " + $"averaging {stopWatch.ElapsedMilliseconds / 1000} miliseconds/request ");
             stopWatch.Reset();
             stopWatch.Start();
             for (int i = 0; i < 1000; i++)
@@ -98,7 +98,7 @@
                 
             }
             stopWatch.Stop();
-            Console.WriteLine($"Time elapsed with stream and completion mode: {stopWatch.ElapsedMilliseconds}");
+            Console.WriteLine($"Time elapsed with stream and completion mode: {stopWatch.ElapsedMilliseconds}, " + $"averaging {stopWatch.ElapsedMilliseconds / 1000} miliseconds/request ");
             stopWatch.Reset();
             stopWatch.Start();
             for (int i = 0; i < 1000; i++)
@@ -106,7 +106,7 @@
                 await GetResourceVIAHttpRequestMessageTest();
             }
             stopWatch.Stop();
-            Console.WriteLine($"Time elapsed with HttpRequestMessage: {stopWatch.ElapsedMilliseconds}");
+            Console.WriteLine($"Time elapsed with HttpRequestMessage: {stopWatch.ElapsedMilliseconds}, " + $"averaging {stopWatch.ElapsedMilliseconds / 1000} miliseconds/request ");
         }
 
     }
