@@ -43,14 +43,6 @@
             {
                 response.EnsureSuccessStatusCode();
                 var poster = stream.ReadAndDeserializeFromJson<IntegrationProduct>();
-                //using (var streamReader = new StreamReader(stream))
-                //{
-                //    using (var jsonReader = new JsonTextReader(streamReader))
-                //    {
-                //        var serializer = new Newtonsoft.Json.JsonSerializer();
-                //        var poster = serializer.Deserialize<IntegrationProduct>(jsonReader);
-                //    }
-                //}
             }
         }
     }
