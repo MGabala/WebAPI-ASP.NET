@@ -55,7 +55,7 @@
             var request = new HttpRequestMessage(HttpMethod.Get, $"/api/products/3");
 
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+            //request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
             var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
             using (var stream = await response.Content.ReadAsStreamAsync())
             {

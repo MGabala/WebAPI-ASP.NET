@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------------------------
 namespace APIIntegartion
 {
-    internal class APIIntegration : CRUDService
+    internal class APIIntegration 
     {
         static async Task Main(string[] args)
         {
@@ -13,8 +13,9 @@ namespace APIIntegartion
             //await StreamInstance.Run();
             //var PerformanceTestInstance = new PerformanceTest();
             //await PerformanceTestInstance.Run();
-            var CancelationService = new CancelationService();
-            await CancelationService.Run();
+            //var CancelationService = new CancelationService();
+            //await CancelationService.Run();
+           
         }
     }
 }
