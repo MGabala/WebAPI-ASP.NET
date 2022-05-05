@@ -38,7 +38,6 @@ namespace APIIntegartion
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddLogging(config => config.AddDebug().AddConsole());
-            serviceCollection.AddHttpClient();
             serviceCollection.AddHttpClient("API-INTEGRATION", client =>
             {
                 client.BaseAddress = new Uri("https://localhost:7033");
