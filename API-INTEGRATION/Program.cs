@@ -25,6 +25,7 @@ namespace APIIntegartion
             {
                 Console.WriteLine(ex.Message);
             }
+           Console.ReadKey();
            await host.RunAsync();
         }
 
@@ -36,7 +37,23 @@ namespace APIIntegartion
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
-            throw new NotImplementedException();
+            serviceCollection.AddLogging(config => config.AddDebug().AddConsole());
+            serviceCollection.AddHttpClient("API-INTEGRATION", client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:7033");
+                client.Timeout = new TimeSpan(0, 0, 30);
+                client.DefaultRequestHeaders.Clear();
+            }).ConfigurePrimaryHttpMessageHandler(handler =>
+                new HttpClientHandler()
+                {
+                    AutomaticDecompression = System.Net.DecompressionMethods.GZip
+                });
+            serviceCollection.AddHttpClient<APIIntegration>().ConfigurePrimaryHttpMessageHandler(
+                handler => new HttpClientHandler()
+                {
+                    AutomaticDecompression = System.Net.DecompressionMethods.GZip
+                });
+            serviceCollection.AddScoped<IIntegrationService, StreamService>();
         }
     }
 }
