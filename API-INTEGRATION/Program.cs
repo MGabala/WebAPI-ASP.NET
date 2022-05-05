@@ -9,10 +9,12 @@ namespace APIIntegartion
         {
             //var CRUDinstance = new CRUDService();
             //await CRUDinstance.Run();
-            var StreamInstance = new StreamService();
-            await StreamInstance.Run();
+            //var StreamInstance = new StreamService();
+            //await StreamInstance.Run();
             //var PerformanceTestInstance = new PerformanceTest();
             //await PerformanceTestInstance.Run();
+            var CancelationService = new CancelationService();
+            await CancelationService.Run();
         }
     }
 }
