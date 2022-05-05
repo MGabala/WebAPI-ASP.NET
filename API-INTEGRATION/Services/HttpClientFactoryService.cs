@@ -11,8 +11,8 @@
         }
         public async Task Run()
         {
-            //cancellationToken.CancelAfter(1000);
-            //await GetProductWithHttpClientFactory(cancellationToken.Token);
+            cancellationToken.CancelAfter(15000);
+            await GetProductWithHttpClientFactory(cancellationToken.Token);
         }
 
         private async Task GetProductWithHttpClientFactory(CancellationToken cancellationToken)
@@ -20,7 +20,8 @@
             var httpClient = _httpClientFactory.CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Get, "https://localhost:7033/api/products/3");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            using (var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken))
+            using (var response = await httpClient.SendAsync(
+                request, HttpCompletionOption.ResponseHeadersRead, cancellationToken))
             {
                 var stream = await response.Content.ReadAsStreamAsync();
                 response.EnsureSuccessStatusCode();
