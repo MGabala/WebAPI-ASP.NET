@@ -65,7 +65,7 @@ namespace APIIntegartion
                 {
                     AutomaticDecompression = System.Net.DecompressionMethods.GZip
                 });
-            serviceCollection.AddScoped<IIntegrationService, HandlingErrorsAndFaults>();
+            serviceCollection.AddScoped<IIntegrationService, HttpHandlerService>();
         }
     }
 }
