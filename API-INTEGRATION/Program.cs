@@ -55,7 +55,8 @@ namespace APIIntegartion
                 client.BaseAddress = new Uri("https://localhost:7033");
                 client.Timeout = new TimeSpan(0, 0, 30);
                 client.DefaultRequestHeaders.Clear();
-            }).ConfigurePrimaryHttpMessageHandler(handler =>
+            }).AddHttpMessageHandler(handler => new TimeOutHandler(TimeSpan.FromSeconds(20)))
+                .ConfigurePrimaryHttpMessageHandler(handler =>
                 new HttpClientHandler()
                 {
                     AutomaticDecompression = System.Net.DecompressionMethods.GZip
