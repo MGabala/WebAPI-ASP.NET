@@ -54,7 +54,7 @@ public class ProductController : ControllerBase
     /// <summary>
     /// Metoda pobiera pojedyńczy produkt o konkretnym ID.
     /// </summary>
-    /// <param name="id">Id produktu</param>
+    /// <param name="id">Id produktu</param> 
     /// <returns></returns>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetProduct(int id)
