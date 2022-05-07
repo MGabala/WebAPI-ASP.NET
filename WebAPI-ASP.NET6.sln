@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI-ASP.NET6", "WebAPI-ASP.NET6.csproj", "{2624D4D4-F6AE-44E8-AAE8-C9C684C9E18E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API-INTEGRATION", "API-INTEGRATION\API-INTEGRATION.csproj", "{93A5C978-BB6F-4CDC-AC53-7550D88D91C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API-INTEGRATION", "API-INTEGRATION\API-INTEGRATION.csproj", "{93A5C978-BB6F-4CDC-AC53-7550D88D91C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit.Tests", "Unit.Tests\Unit.Tests\Unit.Tests.csproj", "{A68AF4CD-7D93-4962-9764-4D8B6A31A894}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{93A5C978-BB6F-4CDC-AC53-7550D88D91C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93A5C978-BB6F-4CDC-AC53-7550D88D91C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93A5C978-BB6F-4CDC-AC53-7550D88D91C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A68AF4CD-7D93-4962-9764-4D8B6A31A894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A68AF4CD-7D93-4962-9764-4D8B6A31A894}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A68AF4CD-7D93-4962-9764-4D8B6A31A894}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A68AF4CD-7D93-4962-9764-4D8B6A31A894}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

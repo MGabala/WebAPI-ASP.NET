@@ -1,7 +1,8 @@
 ﻿//--------------------------------------------------------------------------------------------------------------------------
 //CRUD with Authorization by Policy with search & filter & pagination metadata. Documentation completed for sample methods.|
 //--------------------------------------------------------------------------------------------------------------------------
-namespace WebAPI.Controllers;
+
+namespace WebAPI_ASP.NET6.Controllers;
 [ApiController, Route("api/products"), ApiVersion("1.0")]
 //[Authorize(Policy = "TestPolicy")]
 
@@ -24,19 +25,19 @@ public class ProductController : ControllerBase
     }
 
     //-------------------------------------------------------------------------------------//
-  /// <summary>
-  /// Metoda pobiera listę produktów, pozwala szukać po określonej nazwie lub frazie. Pozwala ustawić limit danych i przeglądać konkretne strony.
-  /// </summary>
-  /// <param name="name">Znajdz produkt o określonej nazwie</param>
-  /// <param name="searchQuery">Szukaj produkty zawierające dany ciąg</param>
-  /// <param name="pageNumber">Określ którą stronę chcesz wylistować</param>
-  /// <param name="pageSize">Określa ilość produktów na stronie</param>
-  /// <returns></returns>
+    /// <summary>
+    /// Metoda pobiera listę produktów, pozwala szukać po określonej nazwie lub frazie. Pozwala ustawić limit danych i przeglądać konkretne strony.
+    /// </summary>
+    /// <param name="name">Znajdz produkt o określonej nazwie</param>
+    /// <param name="searchQuery">Szukaj produkty zawierające dany ciąg</param>
+    /// <param name="pageNumber">Określ którą stronę chcesz wylistować</param>
+    /// <param name="pageSize">Określa ilość produktów na stronie</param>
+    /// <returns></returns>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Product>>> GetProducts(
-        [FromQuery] string? name, string? searchQuery, int pageNumber = 1, int pageSize = 5 )
+        [FromQuery] string? name, string? searchQuery, int pageNumber = 1, int pageSize = 5)
     {
-        if(pageSize > maxSize)
+        if (pageSize > maxSize)
         {
             pageSize = maxSize;
         }
@@ -157,7 +158,7 @@ public class ProductController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-        _mapper.Map(finalProductUpdate,productEntity);
+        _mapper.Map(finalProductUpdate, productEntity);
         await _productRepo.SaveChangesAsync();
         return NoContent();
     }
