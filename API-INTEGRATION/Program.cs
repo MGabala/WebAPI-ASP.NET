@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace APIIntegartion
 {
-    internal class APIIntegration 
+    internal class APIIntegration
     {
         static async Task Main(string[] args)
         {
@@ -25,8 +25,8 @@ namespace APIIntegartion
             {
                 Console.WriteLine(ex.Message);
             }
-           Console.ReadKey();
-           await host.RunAsync();
+            Console.ReadKey();
+            await host.RunAsync();
         }
 
         private static IHostBuilder CreateHostBuilder(string[] args)
@@ -39,16 +39,16 @@ namespace APIIntegartion
         {
             serviceCollection.AddLogging(config => config.AddDebug().AddConsole());
 
-            serviceCollection.AddHttpClient<ProductClient>("Generic Use of API-INTEGRATION",client =>
-            {
-                client.BaseAddress = new Uri("https://localhost:7033");
-                client.Timeout = new TimeSpan(0, 0, 30);
-                client.DefaultRequestHeaders.Clear();
-            }).ConfigurePrimaryHttpMessageHandler(handler =>
-                new HttpClientHandler()
-                {
-                    AutomaticDecompression = System.Net.DecompressionMethods.GZip
-                });
+            serviceCollection.AddHttpClient<ProductClient>("Generic Use of API-INTEGRATION", client =>
+             {
+                 client.BaseAddress = new Uri("https://localhost:7033");
+                 client.Timeout = new TimeSpan(0, 0, 30);
+                 client.DefaultRequestHeaders.Clear();
+             }).ConfigurePrimaryHttpMessageHandler(handler =>
+                 new HttpClientHandler()
+                 {
+                     AutomaticDecompression = System.Net.DecompressionMethods.GZip
+                 });
 
             serviceCollection.AddHttpClient("API-INTEGRATION", client =>
             {
