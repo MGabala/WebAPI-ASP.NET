@@ -1,8 +1,7 @@
 ﻿namespace APIIntegartion
 {
-    public class PollyPolicies : IIntegrationService
+    public class Polly : IIntegrationService
     {
-       
         
         public Task Run()
         {

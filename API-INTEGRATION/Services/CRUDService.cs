@@ -1,6 +1,7 @@
 ﻿//-----------------------------------------------------------------------------------------------
 // WEB.API INTEGRATION support CRUD actions with two scenarios. Shortcuts and HttpRequestMessage|
 //-----------------------------------------------------------------------------------------------
+using Polly;
 using Polly.Retry;
 
 namespace APIIntegartion
@@ -8,12 +9,14 @@ namespace APIIntegartion
     public class CRUDService
     {
         private static HttpClient _httpClient = new HttpClient();
+        readonly RetryPolicy<HttpResponseMessage> _retryPolicy;
         public CRUDService()
         {
             _httpClient.BaseAddress = new Uri("https://localhost:7033");
             _httpClient.Timeout = new TimeSpan(0, 0, 30);
             _httpClient.DefaultRequestHeaders.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+           
         }
 
         public async Task Run()
