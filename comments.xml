@@ -10,7 +10,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WebAPI.Controllers.ProductController.GetProducts(System.String,System.String,System.Int32,System.Int32)">
+        <member name="M:WebAPI_ASP.NET6.Controllers.ProductController.GetProducts(System.String,System.String,System.Int32,System.Int32)">
             <summary>
             Metoda pobiera listę produktów, pozwala szukać po określonej nazwie lub frazie. Pozwala ustawić limit danych i przeglądać konkretne strony.
             </summary>
@@ -20,33 +20,33 @@
             <param name="pageSize">Określa ilość produktów na stronie</param>
             <returns></returns>
         </member>
-        <member name="M:WebAPI.Controllers.ProductController.GetProduct(System.Int32)">
+        <member name="M:WebAPI_ASP.NET6.Controllers.ProductController.GetProduct(System.Int32)">
             <summary>
             Metoda pobiera pojedyńczy produkt o konkretnym ID.
             </summary>
-            <param name="id">Id produktu</param>
+            <param name="id">Id produktu</param> 
             <returns></returns>
         </member>
-        <member name="M:WebAPI.Controllers.ProductController.CreateNewProduct(WebAPI_ASP.NET6.Entities.Product)">
+        <member name="M:WebAPI_ASP.NET6.Controllers.ProductController.CreateNewProduct(WebAPI_ASP.NET6.Entities.Product)">
             <summary>
             Metoda dodaje produkt do bazy danych.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WebAPI.Controllers.ProductController.UpdateTypeOfProduct(System.Int32,WebAPI_ASP.NET6.Entities.Product)">
+        <member name="M:WebAPI_ASP.NET6.Controllers.ProductController.UpdateTypeOfProduct(System.Int32,WebAPI_ASP.NET6.Entities.Product)">
             <summary>
             Metoda pozwala zaktualizować produkt za pomocą JSON patch.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WebAPI.Controllers.ProductController.DeleteProduct(System.Int32)">
+        <member name="M:WebAPI_ASP.NET6.Controllers.ProductController.DeleteProduct(System.Int32)">
             <summary>
             Usuwa produkt z bazy danych
             </summary>
             <param name="id"> Id produktu do usunięcia</param>
             <returns></returns>
         </member>
-        <member name="M:WebAPI.Controllers.ProductController.UpdateProduct(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{WebAPI_ASP.NET6.Entities.Product})">
+        <member name="M:WebAPI_ASP.NET6.Controllers.ProductController.UpdateProduct(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{WebAPI_ASP.NET6.Entities.Product})">
             <summary>
             Metoda pozwala zaktualizować konkretny atrybut produktu.
             </summary>
